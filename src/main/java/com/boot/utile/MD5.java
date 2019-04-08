@@ -69,7 +69,9 @@ public class MD5 {
 
 	@Test
 	public void test() {
-		String ss = MD5.MD5Encode("123456", "utf-8");
+		String ss = MD5.MD5Encode("1234563c318dd3ea575d6c", "utf-8");
 		System.out.println(ss);
+		String sss = MD5.MD5Encode("123456", "utf-8");
+		System.out.println(sss);
 	}
 }

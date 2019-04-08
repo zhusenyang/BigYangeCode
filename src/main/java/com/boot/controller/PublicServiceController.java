@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.dao.ArticleMapper;
 import com.boot.dao.ArticleTypeMapper;
+import com.boot.dao.UserDao;
 import com.boot.entity.ArticleType;
 import com.boot.entity.Message;
+import com.boot.entity.WebUser;
+import com.boot.utile.MD5;
 
 /** 
 * @author 作者 竺森洋: 
@@ -22,6 +25,8 @@ import com.boot.entity.Message;
 */
 @Controller
 public class PublicServiceController {
+	@Autowired
+	UserDao userDao;
 	@Autowired
 	ArticleMapper articleMapper;
 	@Autowired
@@ -36,11 +41,27 @@ public class PublicServiceController {
 	}
 	@PostMapping("/login")
 	@ResponseBody
-	public Message login(String userName,String password){
-		System.out.println(userName);
-		System.out.println(password);
-		
-		return Message.createMessage();
+	public Message login(String userName,String password,String salt){
+		Message msg =Message.createMessage();
+		if(salt==null) {
+			WebUser webUser= userDao.findUserByName(userName);
+			if (webUser==null) {
+				msg.setContent("登入失败");
+				return msg;
+			}
+			salt=webUser.getSalt();
+		}
+		String realPassword=MD5.MD5EncodeByUTF8(password+salt);
+		System.out.println(userName+"\r"+realPassword);
+		Integer id=userDao.findUserByNameAndPassword(userName, realPassword);//
+		if(id!=null) {
+			//登入成功
+			msg.setContent("登入成功");
+		}else {
+			//登入失败
+			msg.setContent("帐号或密码错误,登入失败");
+		}
+		return msg;
 	}
 }
  
