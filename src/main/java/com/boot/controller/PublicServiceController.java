@@ -2,12 +2,11 @@ package com.boot.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.dao.ArticleMapper;
@@ -31,7 +30,7 @@ public class PublicServiceController {
 	ArticleMapper articleMapper;
 	@Autowired
 	ArticleTypeMapper articleTypeMapper;
-	
+
 	@RequestMapping("/getMenu")
 	@ResponseBody
 	public List<ArticleType> getMenuList(){
@@ -42,6 +41,7 @@ public class PublicServiceController {
 	@PostMapping("/login")
 	@ResponseBody
 	public Message login(String userName,String password,String salt){
+		
 		Message msg =Message.createMessage();
 		if(salt==null) {
 			WebUser webUser= userDao.findUserByName(userName);
@@ -52,7 +52,6 @@ public class PublicServiceController {
 			salt=webUser.getSalt();
 		}
 		String realPassword=MD5.MD5EncodeByUTF8(password+salt);
-		System.out.println(userName+"\r"+realPassword);
 		Integer id=userDao.findUserByNameAndPassword(userName, realPassword);//
 		if(id!=null) {
 			//登入成功
@@ -60,6 +59,16 @@ public class PublicServiceController {
 		}else {
 			//登入失败
 			msg.setContent("帐号或密码错误,登入失败");
+		}
+		return msg;
+	}
+	
+	public Message registeredUser() {
+		Message msg=Message.createMessage();
+		if (true) {//TODO 判断用户是否登入
+			//对已登入用户拒绝开放注册服务
+		}else {
+			//开放注册
 		}
 		return msg;
 	}
