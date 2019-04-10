@@ -22,8 +22,10 @@ import com.boot.utile.MD5;
 */
 @Controller
 public class PageContrllor {
-
-	
+	@RequestMapping("/")
+	public String home(){
+		return "index.html";
+	}
 	@RequestMapping("/index")
 	public String index(){
 		return "index.html";
@@ -51,6 +53,10 @@ public class PageContrllor {
 	@RequestMapping("/info")
 	public String info(){
 		return "info.html";
+	}
+	@RequestMapping("/中文")
+	public String chinesePage(){
+		return"index.html";
 	}
 }
  

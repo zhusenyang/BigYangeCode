@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.junit.Test;
+
 
 /**
  * @author 作者 竺森洋:
@@ -67,7 +67,7 @@ public class MD5 {
 		return hexDigIts[d1] + hexDigIts[d2];
 	}
 
-	@Test
+
 	public void test() {
 		String ss = MD5.MD5Encode("1234563c318dd3ea575d6c", "utf-8");
 		System.out.println(ss);

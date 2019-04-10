@@ -66,18 +66,22 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/logout", "logout");
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
-        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
-        filterChainDefinitionManager.put("/login", "anon");
-        filterChainDefinitionManager.put("/index", "anon");
-        filterChainDefinitionManager.put("/ajaxLogin", "anon");
+//        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
+//        filterChainDefinitionManager.put("/login", "anon");
+//        filterChainDefinitionManager.put("/index", "anon");
+//        filterChainDefinitionManager.put("/ajaxLogin", "anon");
+        filterChainDefinitionManager.put("/getMenu", "anon");
+        filterChainDefinitionManager.put("/", "anon");
+        filterChainDefinitionManager.put("/game", "anon");
+
         filterChainDefinitionManager.put("/statistic/**",  "anon");
-        filterChainDefinitionManager.put("/**",  "authc,roles[user]");//其他资源全部拦截
+//        filterChainDefinitionManager.put("/**",  "authc,roles[user]");//其他资源全部拦截
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/toLogin");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/success");
+        shiroFilterFactoryBean.setSuccessUrl("/");
         // 未授权界面
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 

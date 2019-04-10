@@ -209,8 +209,8 @@ function login(){
 	var user_Name=$("#userName").value();
 	var PassWord=$("#password").value();
 	if(user_Nmae!=null&&PassWord!=null){
-		console.log(user_Name);
-		console.log(PassWord);
+		// console.log(user_Name);
+		// console.log(PassWord);
 	}
 	$.ajax({ 
 		url: "http://localhost:8080/getMenu",
@@ -245,7 +245,7 @@ function login(){
 			       s=s+ '</ul>'+
 			      '</li>';
 			}
-			console.log(s);
+			// console.log(s);
 			$("#topnav").append(s);
       }});
 }
@@ -254,7 +254,7 @@ function loadMenu(){
 		url: "http://localhost:8080/getMenu",
 		async:false,
 		type : "get",
-		scriptCharset : 'utf-8',
+		// scriptCharset : 'utf-8',
 		success: function(result){
 			var s='';
 			for(var i in result){
@@ -279,7 +279,7 @@ function loadMenu(){
 			       s=s+ '</ul>'+
 			      '</li>';
 			}
-			console.log(s);
+			// console.log(s);
 			$("#topnav").append(s);
       }});
 }
