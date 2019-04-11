@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 */
 public class Message {
 	private int StateNum;
-	private String Content;
+	private Object Content;
 	
 	public Message() {
 		super();
@@ -25,7 +25,7 @@ public class Message {
 	public void setStateNum(int stateNum) {
 		StateNum = stateNum;
 	}
-	public String getContent() {
+	public Object getContent() {
 		return Content;
 	}
 	public void setContent(String content) {

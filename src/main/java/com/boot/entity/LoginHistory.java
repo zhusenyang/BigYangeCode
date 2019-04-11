@@ -1,4 +1,7 @@
 package com.boot.entity;
+import com.boot.utile.AddressUtil;
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 import java.util.Date;
 
 public class LoginHistory {
@@ -8,7 +11,16 @@ public class LoginHistory {
 	private String area;
 	private Date loginDate;
 	private Date loginTime;
-	
+	LoginAddress loginAddress;
+
+	public void setLoginAddress(LoginAddress loginAddress) {
+		this.loginAddress = loginAddress;
+	}
+
+	public LoginAddress getLoginAddress() {
+		return loginAddress;
+	}
+
 	public Date getLoginTime() {
 		return loginTime;
 	}
@@ -32,6 +44,9 @@ public class LoginHistory {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+		LoginAddress addr=AddressUtil.getAddressByIP(ip);
+
+		area=addr.toString();
 	}
 	public String getArea() {
 		return area;
@@ -44,6 +59,20 @@ public class LoginHistory {
 	}
 	public void setLoginDate(Date loginDate) {
 		this.loginDate = loginDate;
+	}
+	public static LoginHistory createHistory(WebUser user,String userip){
+		if (user==null){
+			return null;
+		}else{
+			LoginHistory history =new LoginHistory();
+			history.setIp(userip);
+			Date date = new Date();
+			history.setLoginDate(date);
+			history.setLoginTime(date);
+			history.setUserId(user.getId());
+			history.setArea("");
+		}
+		return new LoginHistory();
 	}
 	
 }

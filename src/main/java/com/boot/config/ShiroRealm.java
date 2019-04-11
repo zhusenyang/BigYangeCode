@@ -1,15 +1,17 @@
 package com.boot.config;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import com.boot.dao.UserDao;
+import com.boot.entity.WebUser;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroRealm extends AuthorizingRealm{
 	//一般这里都写的是servic，这里省略直接调用dao
+    @Autowired
+    private UserDao userDao;
 //    @Autowired
 //    private UUserDao uUserDao;
 //    @Autowired
@@ -29,8 +31,19 @@ public class ShiroRealm extends AuthorizingRealm{
 //        logger.info("验证当前Subject时获取到token为：" + token.toString());
         //查出是否有此用户
         String username = token.getUsername();
-//        UUser hasUser = uUserDao.selectAllByName(username);
-//
+        char[] userPasswordChar=token.getPassword();
+        String userPasswordStr=new String(userPasswordChar);
+//        System.out.println("shiro:\tusername="+username);
+//        System.out.println("shiro:\tpassword="+userPasswordStr);
+
+
+        WebUser user=userDao.findUserByName(username);
+        if (user!=null){
+            user=userDao.findUserByNameAndPassword(username,userPasswordStr);
+            SimpleAuthenticationInfo sa =new SimpleAuthenticationInfo(username,user.getPassword(),getName());
+//            System.out.println("shiro:\tusername="+user.getPassword());
+            return sa;
+        }
 //        if (hasUser != null) {
 //            // 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
 //            List<URole> rlist = uRoleDao.findRoleByUid(hasUser.getId());//获取用户角色
