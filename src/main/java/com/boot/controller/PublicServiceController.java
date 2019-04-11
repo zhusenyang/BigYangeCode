@@ -72,7 +72,7 @@ public class PublicServiceController {
 //			//登入成功
 //			msg.setContent("登入成功");
 //		}else {
-//			//登入失败
+//			//登入失败3
 //			msg.setContent("帐号或密码错误,登入失败");
 //		}
 		return msg;
