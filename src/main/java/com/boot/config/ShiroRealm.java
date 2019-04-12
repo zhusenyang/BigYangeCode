@@ -1,9 +1,7 @@
 package com.boot.config;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import com.boot.entity.WebUser;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -41,7 +39,14 @@ public class ShiroRealm extends AuthorizingRealm {
 //        logger.info("验证当前Subject时获取到token为：" + token.toString());
 		// 查出是否有此用户
 		String username = token.getUsername();
-		System.out.println("username=\t"+username);
+		char[] checkPswC =token.getPassword();
+		String checkPsdS=new String(checkPswC);
+		WebUser user= userDao.findUserByName(username);
+		if (user!=null&&user.getId()!=null){
+			System.out.println("real password=\t"+user.getPassword());
+			return  new SimpleAuthenticationInfo(user,checkPsdS,getName());
+		}
+//		System.out.println("username=\t"+username);
 		
 //        UUser hasUser = uUserDao.selectAllByName(username);
 //

@@ -14,4 +14,6 @@ public interface UserDao {
 	
 	@Select("select id,salt from WebUser where userName=#{userName}")
 	public WebUser findUserByName(@Param("userName") String userName);
+	@Select("select * from WebUser where userName=#{userName}")
+	public WebUser findUserByNameForShrio(@Param("userName") String userName);
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.boot.config.ShiroRealm;
 import com.boot.dao.ArticleMapper;
 import com.boot.dao.ArticleTypeMapper;
 import com.boot.dao.UserDao;
@@ -46,35 +45,19 @@ public class PublicServiceController {
 	@ResponseBody
 	public Message login(String userName,String password,String salt){
 		Message msg =Message.createMessage();
-		String realPassword=MD5.MD5EncodeByUTF8(password+salt);
+		//TODO 判断 userName是否为空
+		String real_salt=userDao.findUserByName(userName).getSalt();
+		String realPassword=MD5.MD5EncodeByUTF8(password+real_salt);
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, realPassword);
 	        SecurityUtils.getSubject().login(token);
 	        msg.setContent("登入成功");
 	        msg.setStateNum(400);
 		}catch(Exception e ) {
-			msg.setContent("登入失败");
+			msg.setContent(e.toString());
+			System.out.println(e);
 	        msg.setStateNum(500);
 		}
-		
-		
-//		if(salt==null) {
-//			WebUser webUser= userDao.findUserByName(userName);
-//			if (webUser==null) {
-//				msg.setContent("登入失败");
-//				return msg;
-//			}
-//			salt=webUser.getSalt();
-//		}
-//		String realPassword=MD5.MD5EncodeByUTF8(password+salt);
-//		Integer id=userDao.findUserByNameAndPassword(userName, realPassword);//
-//		if(id!=null) {
-//			//登入成功
-//			msg.setContent("登入成功");
-//		}else {
-//			//登入失败3
-//			msg.setContent("帐号或密码错误,登入失败");
-//		}
 		return msg;
 	}
 	
