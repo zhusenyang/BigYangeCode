@@ -55,7 +55,7 @@ public class PublicServiceController {
 	        msg.setStateNum(400);
 		}catch(Exception e ) {
 			msg.setContent(e.toString());
-			System.out.println(e);
+			System.out.println(e);//sj
 	        msg.setStateNum(500);
 		}
 		return msg;
