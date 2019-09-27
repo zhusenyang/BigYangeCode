@@ -46,6 +46,11 @@ public class PublicServiceController {
 	public Message login(String userName,String password,String salt){
 		Message msg =Message.createMessage();
 		//TODO 判断 userName是否为空
+		WebUser wb = userDao.findUserByName(userName);
+		if (wb==null){
+			msg.setContent("帐号或密码错误");
+			msg.setStateNum(500);
+		}
 		String real_salt=userDao.findUserByName(userName).getSalt();
 		String realPassword=MD5.MD5EncodeByUTF8(password+real_salt);
 		try {
