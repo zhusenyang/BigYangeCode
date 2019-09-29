@@ -20,10 +20,6 @@ public class AddressUtil {
         //WL-Proxy-Client-IP
 
     }
-    public static void main(String[] args) {
-
-        System.out.println(getAddressByIP("192.168.1.6"));
-    }
 
     /**
      * 获取真实IP
@@ -62,7 +58,6 @@ public class AddressUtil {
 
             reader.close();
             String ipAddr = result.toString();
-//            System.out.println(ipAddr);
             try {
                 JSONObject obj1 = new JSONObject(ipAddr);
                 if ("0".equals(obj1.get("status").toString())) {

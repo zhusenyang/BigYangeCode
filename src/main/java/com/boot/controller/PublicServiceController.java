@@ -1,7 +1,12 @@
 package com.boot.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import com.boot.entity.LoginHistory;
+import com.boot.service.UserService;
+import com.boot.utile.AddressUtil;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,6 +25,8 @@ import com.boot.entity.Message;
 import com.boot.entity.WebUser;
 import com.boot.utile.MD5;
 
+import javax.servlet.http.HttpServletRequest;
+
 /** 
 * @author 作者 竺森洋: 
 * @version 创建时间：2019年3月19日 上午11:28:52 
@@ -27,8 +34,19 @@ import com.boot.utile.MD5;
 */
 @Controller
 public class PublicServiceController {
+	Logger logger= LogManager.getLogger(PublicServiceController.class);
+
+	/**
+	 * 用户dao层
+	 */
 	@Autowired
 	UserDao userDao;
+	/**
+	 * 用户服务层
+	 */
+	@Autowired
+	UserService userService;
+
 	@Autowired
 	ArticleMapper articleMapper;
 	@Autowired
@@ -43,24 +61,31 @@ public class PublicServiceController {
 	}
 	@PostMapping("/login")
 	@ResponseBody
-	public Message login(String userName,String password,String salt){
+	public Message login(String userName, String password, String salt, HttpServletRequest request){
 		Message msg =Message.createMessage();
+
 		//TODO 判断 userName是否为空
 		WebUser wb = userDao.findUserByName(userName);
 		if (wb==null){
 			msg.setContent("帐号或密码错误");
 			msg.setStateNum(500);
 		}
-		String real_salt=userDao.findUserByName(userName).getSalt();
+		String real_salt=wb.getSalt();
 		String realPassword=MD5.MD5EncodeByUTF8(password+real_salt);
+		WebUser user = userDao.findUserByName(userName);
+
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, realPassword);
+			logger.debug("开始验证用户信息");
 	        SecurityUtils.getSubject().login(token);
+	        WebUser webUser = userDao.findUserByNameAndPassword(userName,realPassword);
+	        userService.addLoginHistory(request,webUser);
+			msg.setDate(webUser);
 	        msg.setContent("登入成功");
-	        msg.setStateNum(400);
+	        msg.setStateNum(200);
 		}catch(Exception e ) {
 			msg.setContent(e.toString());
-			System.out.println(e);//sj
+			logger.error(e.getMessage());
 	        msg.setStateNum(500);
 		}
 		return msg;

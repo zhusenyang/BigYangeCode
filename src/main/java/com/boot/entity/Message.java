@@ -10,7 +10,16 @@ import org.springframework.stereotype.Component;
 public class Message {
 	private int StateNum;
 	private Object Content;
-	
+	private Object Date;
+
+	public Object getDate() {
+		return Date;
+	}
+
+	public void setDate(Object date) {
+		Date = date;
+	}
+
 	public Message() {
 		super();
 	}

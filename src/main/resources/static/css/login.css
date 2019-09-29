@@ -103,6 +103,9 @@ button:hover {
 .popcon .group  input[type="text"] {
 	color: #999999;
 }
+.popcon .group  input[type="password"] {
+	color: #999999;
+}
 
 .popcon .group i {
 	position: absolute;
@@ -123,6 +126,16 @@ button:hover {
 	background: #f0f0f0;
 }
 
+.popcon input[type="password"] {
+	width: 90%;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 26px;
+	margin-top: 20px;
+	padding: 0 10px 0 40px;
+	border: none;
+	background: #f0f0f0;
+}
 .popcon input:focus {
 	outline: none;
 	background: #DDDDDD;

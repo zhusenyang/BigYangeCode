@@ -1,5 +1,8 @@
 package com.boot.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.LoggerNameAwareMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +16,7 @@ import com.boot.entity.WebUser;
  */
 @Controller("/user")
 public class UserServiceController {
-	
+	Logger logger = LogManager.getLogger(UserServiceController.class);
 	/**
 	 * @param token 用户登入认证密钥
 	 * @return 返回用户类

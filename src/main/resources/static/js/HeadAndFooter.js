@@ -163,7 +163,7 @@ function loadLogin(){
                     '<i class="fa fa-user"></i>'+
                 '</div>'+
                 '<div class="group">'+
-                    '<input id="password" type="text" value="请输入密码" onFocus="if(value=='+
+                    '<input id="password" type="password" value="请输入密码" onFocus="if(value=='+
                 "'请输入密码'"+
                 ') {value='+
                 "''"+
