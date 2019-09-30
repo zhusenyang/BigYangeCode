@@ -43,7 +43,6 @@ public class ShiroRealm extends AuthorizingRealm {
 		String checkPsdS=new String(checkPswC);
 		WebUser user= userDao.findUserByName(username);
 		if (user!=null&&user.getId()!=null){
-			System.out.println("real password=\t"+user.getPassword());
 			return  new SimpleAuthenticationInfo(user,checkPsdS,getName());//js
 		}
 //		System.out.println("username=\t"+username);

@@ -236,7 +236,7 @@ function login(){
 }
 function loadMenu(){
 	$.ajax({ 
-		url: "http://localhost:8080/getMenu",
+		url: yu_ming+"/getMenu",
 		async:false,
 		type : "get",
 		scriptCharset : 'utf-8',

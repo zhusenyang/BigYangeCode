@@ -63,8 +63,6 @@ public class PublicServiceController {
 	@ResponseBody
 	public Message login(String userName, String password, String salt, HttpServletRequest request){
 		Message msg =Message.createMessage();
-
-		//TODO 判断 userName是否为空
 		WebUser wb = userDao.findUserByName(userName);
 		if (wb==null){
 			msg.setContent("帐号或密码错误");
@@ -76,7 +74,7 @@ public class PublicServiceController {
 
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, realPassword);
-			logger.debug("开始验证用户信息");
+			logger.info("开始验证用户信息");
 	        SecurityUtils.getSubject().login(token);
 	        WebUser webUser = userDao.findUserByNameAndPassword(userName,realPassword);
 	        userService.addLoginHistory(request,webUser);
