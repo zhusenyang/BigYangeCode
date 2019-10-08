@@ -45,7 +45,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			return null;
 		}
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-//        logger.info("验证当前Subject时获取到token为：" + token.toString());
+//        logger.info("验证当前Subject时获取到token为：" + token.toString() );
 		// 查出是否有此用户
 		String username = token.getUsername();
 		char[] checkPswC =token.getPassword();

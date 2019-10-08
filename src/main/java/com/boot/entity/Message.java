@@ -1,7 +1,5 @@
 package com.boot.entity;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 /** 
@@ -17,14 +15,14 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 5978811454467951173L;
 	private int StateNum;
 	private Object Content;
-	private Object Date;
+	private Object Data;
 
-	public Object getDate() {
-		return Date;
+	public Object getData() {
+		return Data;
 	}
 
-	public void setDate(Object date) {
-		Date = date;
+	public void setData(Object data) {
+		Data = data;
 	}
 
 	public Message() {
