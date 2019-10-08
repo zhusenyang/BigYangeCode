@@ -39,7 +39,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.10.RELEASE" />
-          <element id="library" level="project" name="Maven: org.apache:json-2.0:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-devtools:2.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.10.RELEASE" />
