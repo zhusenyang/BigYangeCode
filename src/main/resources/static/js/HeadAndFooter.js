@@ -141,6 +141,7 @@ function loadSideBar(){
 	}
 }
 function loadLogin(){
+	checkUserLogin();
 	var login_model='<div class="mypop" style="display: none">'+
     '<div class="graybox" ></div>'+
     '<div class="popbox">'+
@@ -191,6 +192,7 @@ function loadLogin(){
         '</div>'+
     '</div>'+
 '</div>';
+	var user_model='';
 	var load_Login = $(document.body);
 	if(load_Login!=null){
 		if (load_Login!=null) {
@@ -205,6 +207,20 @@ function loadLogin(){
         $('.mypop').hide();
     })
 }
+function checkUserLogin(){
+	$.ajax({
+		url: yu_ming+"/checkUserLogin",
+		async:false,
+		type : "post",
+		success: function(result){
+			if (result.stateNum!=null&&result.stateNum==200) {
+
+			}
+		}
+	})
+}
+
+
 function login(){
 	var user_Name=$("#userName").val();
 	var PassWord=$("#password").val();

@@ -1,10 +1,13 @@
 package com.boot.config;
 
 import com.boot.entity.WebUser;
+import com.boot.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.boot.dao.UserDao;
@@ -13,6 +16,12 @@ public class ShiroRealm extends AuthorizingRealm {
 	// 一般这里都写的是servic，这里省略直接调用dao
     @Autowired
     private UserDao userDao;
+
+	/**
+	 * 用户服务层
+	 */
+	@Autowired
+	UserService userService;
 //    @Autowired
 //    private URoleDao uRoleDao;
 //    @Autowired
@@ -41,9 +50,13 @@ public class ShiroRealm extends AuthorizingRealm {
 		String username = token.getUsername();
 		char[] checkPswC =token.getPassword();
 		String checkPsdS=new String(checkPswC);
-		WebUser user= userDao.findUserByName(username);
+		WebUser user= userDao.findUserByNameAndPassword(username,checkPsdS);
 		if (user!=null&&user.getId()!=null){
-			return  new SimpleAuthenticationInfo(user,checkPsdS,getName());//js
+			AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,checkPsdS,getName());
+			Subject currentUser = SecurityUtils.getSubject();
+			System.out.println(currentUser);
+			//			userService.addLoginHistory(request,user);
+			return authenticationInfo;//js
 		}
 //		System.out.println("username=\t"+username);
 		
