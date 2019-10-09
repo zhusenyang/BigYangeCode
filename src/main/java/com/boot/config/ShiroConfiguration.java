@@ -19,7 +19,7 @@ import org.springframework.context.annotation.DependsOn;
 public class ShiroConfiguration {
 	/**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
-     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
+     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，因为在
      * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManagerFilter 
      * Chain定义说明 :
      * 1、一个URL可以配置多个Filter，使用逗号分隔 
@@ -43,12 +43,15 @@ public class ShiroConfiguration {
     @DependsOn("lifecycleBeanPostProcessor")
         public EhCacheManager ehCacheManager(){
         EhCacheManager ehCacheManager = new EhCacheManager();
+        ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
         return ehCacheManager;
     }
 
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(shiroRealm());
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // 注入自定义的realm;
+        securityManager.setRealm(shiroRealm());
         securityManager.setCacheManager(ehCacheManager());//用户授权/认证信息Cache, 采用EhCache 缓存
         return securityManager;
     }
@@ -99,5 +102,10 @@ public class ShiroConfiguration {
         aasa.setSecurityManager(securityManager);
         return aasa;
     }
+
+
+
+
+
 
 }

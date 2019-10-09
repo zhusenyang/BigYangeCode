@@ -1,8 +1,10 @@
 package com.boot.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WebUser {
+public class WebUser implements Serializable {
+	private static final long serialVersionUID = -8366929034564774130L;
 	private Integer id;
 	private String userName;
 	private String password;

@@ -36,4 +36,16 @@ public class UserService {
         history.setUserId(user.getId());
         return loginHistoryDao.addNewHistory(history);
     }
+
+    public  int addLoginHistoryByIP(String ip, WebUser user){
+        LoginHistory history = new LoginHistory();
+        Date loginDate = new Date();
+        history.setLoginTime(loginDate);
+        history.setLoginDate(loginDate);
+        history.setIp(ip);
+        history.setLoginAddress(AddressUtil.getAddressByIP(history.getIp()));
+        history.setArea(history.getLoginAddress().getAddress());
+        history.setUserId(user.getId());
+        return loginHistoryDao.addNewHistory(history);
+    }
 }

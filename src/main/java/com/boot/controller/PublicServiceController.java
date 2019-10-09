@@ -1,5 +1,6 @@
 package com.boot.controller;
 
+import java.security.Security;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +12,10 @@ import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,21 +66,21 @@ public class PublicServiceController {
 	public Message login(String userName, String password, String salt, HttpServletRequest request){
 		Message msg =Message.createMessage();
 		WebUser wb = userDao.findUserByName(userName);
+		logger.info("查询用户是否存在");
 		if (wb==null){
 			msg.setContent("帐号或密码错误");
 			msg.setStateNum(500);
 		}
 		String real_salt=wb.getSalt();
 		String realPassword=MD5.MD5EncodeByUTF8(password+real_salt);
-		WebUser user = userDao.findUserByName(userName);
-
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userName, realPassword);
+			token.setRememberMe(true);
 			logger.info("开始验证用户信息");
-	        SecurityUtils.getSubject().login(token);
-	        WebUser webUser = userDao.findUserByNameAndPassword(userName,realPassword);
-	        userService.addLoginHistory(request,webUser);
-			msg.setDate(webUser);
+			Subject currentUser = SecurityUtils.getSubject();
+			currentUser.login(token);
+	        WebUser webUser = (WebUser) currentUser.getPrincipal();
+//			msg.setDate(webUser);
 	        msg.setContent("登入成功");
 	        msg.setStateNum(200);
 		}catch(Exception e ) {
@@ -106,8 +107,27 @@ public class PublicServiceController {
 	 */
 	@RequestMapping("/checkUserLogin")
 	@ResponseBody
-	public Message checkUserLogin(){
+	public  Message checkUserLogin(){
 		Message msg = Message.createMessage();
+		msg.setStateNum(Message.SUCCESS_NUM);
+		Subject currentUser = SecurityUtils.getSubject();
+		msg.setDate(currentUser.getPrincipal());
+		if (!currentUser.isAuthenticated()){// 若用户登入验证正确则返回
+			msg.setStateNum(Message.USER_NO_LOGIN);
+		}
+		return msg;
+	}
+
+	/**
+	 * 用户登出
+	 * @return
+	 */
+	@RequestMapping("/logOut")
+	@ResponseBody
+	public Message logOut(){
+		Message msg = Message.createMessage();
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
 		return msg;
 	}
 }
