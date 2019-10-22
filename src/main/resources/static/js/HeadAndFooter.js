@@ -213,10 +213,15 @@ function checkUserLogin(){
 		type : "post",
 		success: function(result){
 			if (result.stateNum!=null&&result.stateNum==200) {
+				var webUser =result.data;
+				var head=webUser.head;
+				if (head==null){
+					head='404.jpg';
+				}
 				var user_part=$("#user_model");
-				var user_model='<a id="userName" class="user_name">'+'<img src="'+yu_ming+'/head/404.jpg'+'" style="top-margin:10px;border-radius:50%;width:20px;hight:20px;display: inline;margin-right: 5px"  >'+'111'+'</a>'
-				// var user_model='<a id="userName" >'+'111'+'</a>'
-				console.log(result.data);
+				var user_model='<div class="user_model" style="margin-top: 10px;margin-right: 15px;"><li  id="user_model"><a id="userName" >'+
+					'<img id="userHead" src="'+yu_ming+'/head/'+head+'" style="border-radius:50%;width:40px;hight:40px;display: inline;margin-right: 5px"  ></a>'
+				+'<ul class="sub_user" style="line-height:40px;margin-top:0px; "><li><a>用户菜单1</a></li><li><a>用户菜单2</a></li></ul></li>'
 				user_part.empty();
 				user_part.append(user_model);
 			}
@@ -242,7 +247,11 @@ function login(){
 				},
 				scriptCharset : 'utf-8',
 				success: function(result){
-					
+					if(result.stateNum==200){
+						checkUserLogin();
+					}else{
+						alert("帐号或密码错误.")
+					}
 				}
 			});
 		}
