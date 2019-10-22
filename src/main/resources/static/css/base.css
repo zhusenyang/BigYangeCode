@@ -126,8 +126,8 @@ header {
 }
 
 .nav li a:hover {
-	color: #fff;
-}
+	 color: #fff;
+ }
 
 .nav li .sub-nav {
 	position: absolute;
@@ -413,4 +413,40 @@ footer a {
 
 .allpage {
 	
+}
+
+.user_model{
+
+	position: relative;
+
+	display: inline-block;
+
+}
+
+.sub_user{
+	display: none;
+	position: absolute;
+	/*right: 0px;*/
+	background-color: #f9f9f9;
+	min-width:80px;
+	box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+	margin-top: 0px;
+	padding: 0px 0px;
+	flex-direction: column;
+	justify-content: center;
+	text-align:center;
+}
+.sub-user li{
+	display:inline;
+}
+.sub_user a{
+	list-style: none;
+	text-align:center;
+	margin: 0px;
+	padding: 0px 0px;
+	max-height: 30px;
+}
+
+.user_model:hover .sub_user{
+	display:block;
 }
