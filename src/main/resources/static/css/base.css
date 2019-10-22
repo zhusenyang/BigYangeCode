@@ -434,6 +434,10 @@ footer a {
 	padding: 0px 0px;
 	flex-direction: column;
 	justify-content: center;
+	text-align:center;
+}
+.sub-user li{
+	display:inline;
 }
 .sub_user a{
 	list-style: none;
