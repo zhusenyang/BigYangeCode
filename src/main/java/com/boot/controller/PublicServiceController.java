@@ -1,16 +1,11 @@
 package com.boot.controller;
 
-import java.security.Security;
-import java.util.Date;
 import java.util.List;
 
-import com.boot.entity.LoginHistory;
 import com.boot.service.UserService;
-import com.boot.utile.AddressUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +56,10 @@ public class PublicServiceController {
 		ArticleType.analyzeListType(allType);
 		return allType;
 	}
+
 	@PostMapping("/login")
 	@ResponseBody
-	public Message login(String userName, String password, String salt, HttpServletRequest request){
+	public Message login( String userName, String password, HttpServletRequest request){
 		Message msg =Message.createMessage();
 		WebUser wb = userDao.findUserByName(userName);
 		logger.info("查询用户是否存在");
@@ -80,7 +76,7 @@ public class PublicServiceController {
 			Subject currentUser = SecurityUtils.getSubject();
 			currentUser.login(token);
 	        WebUser webUser = (WebUser) currentUser.getPrincipal();
-//			msg.setDate(webUser);
+			userService.addLoginHistory(request,webUser);
 	        msg.setContent("登入成功");
 	        msg.setStateNum(200);
 		}catch(Exception e ) {
@@ -110,8 +106,9 @@ public class PublicServiceController {
 	public  Message checkUserLogin(){
 		Message msg = Message.createMessage();
 		msg.setStateNum(Message.SUCCESS_NUM);
+		logger.info("验证用户是否登入..");
 		Subject currentUser = SecurityUtils.getSubject();
-		msg.setDate(currentUser.getPrincipal());
+		msg.setData(currentUser.getPrincipal());
 		if (!currentUser.isAuthenticated()){// 若用户登入验证正确则返回
 			msg.setStateNum(Message.USER_NO_LOGIN);
 		}

@@ -21,11 +21,16 @@ a, a:hover, label, input[type="checkbox"] {
 .clearfix {
 	zoom: 1;
 }
-
+.user_name{
+	height: 24px;
+}
 a {
 	text-decoration: none;
 }
 
+img{
+	text-decoration: none;
+}
 button {
 	width: 180px;
 	height: 36px;

@@ -20,9 +20,6 @@ public class UserService {
     @Autowired
     LoginHistoryDao loginHistoryDao;
 
-    public  int addLoginHistory(LoginHistory history){
-        return loginHistoryDao.addNewHistory(history);
-    }
 
 
     public  int addLoginHistory(HttpServletRequest request, WebUser user){
@@ -37,15 +34,4 @@ public class UserService {
         return loginHistoryDao.addNewHistory(history);
     }
 
-    public  int addLoginHistoryByIP(String ip, WebUser user){
-        LoginHistory history = new LoginHistory();
-        Date loginDate = new Date();
-        history.setLoginTime(loginDate);
-        history.setLoginDate(loginDate);
-        history.setIp(ip);
-        history.setLoginAddress(AddressUtil.getAddressByIP(history.getIp()));
-        history.setArea(history.getLoginAddress().getAddress());
-        history.setUserId(user.getId());
-        return loginHistoryDao.addNewHistory(history);
-    }
 }

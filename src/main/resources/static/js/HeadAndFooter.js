@@ -41,7 +41,7 @@ function loadHead(){
      
       '<!--search end--> '+
     '</nav>'+
-    '<div  style="position:absolute;right:2%;top:0"><a id="login" href="javascript:;">登录</a><span>/</span><a class="login"href="javascript:;">注册</a></div>'
+    '<div id="user_model"  style="position:absolute;right:2%;top:0"><a id="login" href="javascript:;">登录</a><span>/</span><a class="login"href="javascript:;">注册</a></div>'
     ;
 	
 	var door_head = document.getElementById("headmenu");
@@ -192,7 +192,6 @@ function loadLogin(){
         '</div>'+
     '</div>'+
 '</div>';
-	var user_model='';
 	var load_Login = $(document.body);
 	if(load_Login!=null){
 		if (load_Login!=null) {
@@ -214,7 +213,12 @@ function checkUserLogin(){
 		type : "post",
 		success: function(result){
 			if (result.stateNum!=null&&result.stateNum==200) {
-
+				var user_part=$("#user_model");
+				var user_model='<a id="userName" class="user_name">'+'<img src="'+yu_ming+'/head/404.jpg'+'" style="top-margin:10px;border-radius:50%;width:20px;hight:20px;display: inline;margin-right: 5px"  >'+'111'+'</a>'
+				// var user_model='<a id="userName" >'+'111'+'</a>'
+				console.log(result.data);
+				user_part.empty();
+				user_part.append(user_model);
 			}
 		}
 	})
@@ -224,8 +228,6 @@ function checkUserLogin(){
 function login(){
 	var user_Name=$("#userName").val();
 	var PassWord=$("#password").val();
-	console.log(user_Name);
-	console.log(PassWord);
 	if(user_Name!=null&&PassWord!=null){
 		if (user_Name=="请输入帐号"||PassWord=="请输入密码") {
 			alert("请输入正确的账号密码");
@@ -270,7 +272,6 @@ function loadMenu(){
 					var type_content2=childrenType[j].type_content
 					var childrenType2=childrenType[j].childrenType
 					var link2=childrenType[j].link
-					console.log(type_content2);
 					if(link2==null){
 						link2="javascript:;"
 					}
@@ -280,7 +281,6 @@ function loadMenu(){
 			       s=s+ '</ul>'+
 			      '</li>';
 			}
-			console.log(s);
 			$("#topnav").append(s);
       }});
 }
