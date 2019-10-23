@@ -17,7 +17,8 @@ import com.boot.entity.WebUser;
  * @date 20192019年4月10日下午4:38:38
  * @类说明
  */
-@Controller("/user")
+@RequestMapping("/user")
+@Controller
 public class UserServiceController {
 	Logger logger = LogManager.getLogger(UserServiceController.class);
 	/**
@@ -50,9 +51,11 @@ public class UserServiceController {
 		return "browsHistory.html";
 	}
 
-	@RequestMapping("/user/logout")
+
+	@RequestMapping("/logout")
 	@ResponseBody
 	public Message logout(){
+		logger.info("用户注销.");
 		Message msg = new Message();
 		Subject currentUser = SecurityUtils.getSubject();
 		if (currentUser!=null){

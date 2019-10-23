@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../layui/layui.js"></script>
+    <title>用户中心</title>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="../css/zoom-style.css" />
+    <link rel="stylesheet" href="../css/zoomify.min.css" />
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <style type="text/css">
+        .component {
+            padding: 15px;
+            background-color: teal;
+            color: white;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">用户中心</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="javascript:;"> <img
+                    src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span
+                    id="user_name">用户名</span>
+            </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascrpt:;">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="">安全设置</a>
+                    </dd>
+                </dl></li>
+            <li class="layui-nav-item"><a href="javascript:;">登出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul id="left_order" class="layui-nav layui-nav-tree"
+                lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed"><a
+                        href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">轮播图设置</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">logo设置</a>
+                        </dd>
+                    </dl></li>
+                <li class="layui-nav-item layui-nav-itemed"><a class=""
+                                                               href="javascript:;">产品中心</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">类别</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">产品</a>
+                        </dd>
+                    </dl></li>
+
+                <!--
+    <li class="layui-nav-item">
+      <a href="javascript:;">解决方案</a>
+      <dl class="layui-nav-child">
+        <dd><a href="javascript:;">列表一</a></dd>
+        <dd><a href="javascript:;">列表二</a></dd>
+      </dl>
+    </li>
+    -->
+                <li class="layui-nav-item"><a href="">客户案例</a></li>
+                <li class="layui-nav-item"><a href="">人才招聘</a></li>
+                <li class="layui-nav-item"><a href="">用户管理</a></li>
+                <li class="layui-nav-item"><a href="">日志</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 0px;">
+
+            <div class="" id="home_set" style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">新增轮播图</li>
+                        <li onclick="getImages()">删改轮播图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-row">
+                                <div class="layui-container">
+                                    请选择要上传的图片：<br> <br>
+                                    <div class="layui-row">
+                                        <div class="layui-col-md5">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">标题</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required
+                                                           lay-verify="required" placeholder="请输入标题(选填)"
+                                                           autocomplete="off" class="layui-input" id="image_title">
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">超链接</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required
+                                                           lay-verify="required" placeholder="请输入地址(选填)"
+                                                           autocomplete="off" class="layui-input" id="target_url">
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">网图</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required
+                                                           lay-verify="required" placeholder="请输入图片地址(选填,不推荐)"
+                                                           autocomplete="off" class="layui-input" id="webImage_url">
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <span>*建议图片大小小于2M,推荐尺寸比例4:1</span><br> <br>
+                                                <button type="button" class="layui-btn"
+                                                        id="index_image_upload">
+                                                    <i class="layui-icon">&#xe67c;</i>选择图片
+                                                </button>
+                                                <br> <br>
+                                                <button class="layui-btn layui-btn-disabled"
+                                                        id="check_upload" onclick="upLoading()" >确认上传</button>
+                                                <br> <br>
+                                                <div style="display: none;"
+                                                     class="layui-progress  layui-progress-big"
+                                                     lay-filter="progressBar" lay-showPercent="true"
+                                                     id="progressBar_div">
+                                                    <div class="layui-progress-bar" lay-percent="0%"
+                                                         id="progressBar"></div>
+                                                </div>
+                                                <div style="display: none;" id="upload_success">
+                                                    <i class="layui-icon layui-icon-ok-circle"
+                                                       style="font-size: 30px; color: #5FB878;"></i>
+                                                </div>
+                                                <div style="display: none;" id="upload_error">
+                                                    <i class="layui-icon layui-icon-close-fill "
+                                                       style="font-size: 30px; color: #FF5722;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md4">
+                                            <div class="row">
+                                                <label class="layui-form-label">预览:</label>
+
+                                                <div class="example col-xs-12 col-md-12" style="margin-left: 15px;" >
+                                                    <p>
+                                                        <img class="img-rounded" alt=""
+                                                             src="./hxy_files/test-image.jpg" id="test_image" >
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div id="image_show">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <a href="http://bigyangcode.xyz">© - 杭州远成超声波</a>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+    //JavaScript代码区域
+    layui.use('element', function() {
+        var element = layui.element;
+    });
+</script>
+<!--<script type="text/javascript" src="../config/config.js"></script>-->
+<!--<script type="text/javascript" src="../js/jquery.cookie.js"></script>-->
+<script type="text/javascript">
+    var usrId;
+    var userName;
+    var userPower;
+    var userLastLogin;
+    var userLastLoginArea;
+    var userHeadImg;
+    $(function getUser() {
+        var Cid = $.cookie("Mid");
+        var Cname = $.cookie("Mname");
+        var ClastLogin = $.cookie("last_login");
+        var ClastArea = $.cookie("last_login_area");
+        var CheadImage = $.cookie("head_img");
+        var Cpower = $.cookie("power");
+        var CheadImg = $.cookie("head_img");
+        if (Cid == null || Cname == null || ClastLogin == null
+            || ClastArea == null || CheadImg == null) {
+            var yu_ming = getYuMing();
+            $.ajax({
+                url : yu_ming + "manage/getUser",
+                type : "post",
+                success : function(result) {
+                    var user = $.parseJSON(result);
+                    userId = user.id;
+                    userName = user.name;
+                    $("#user_name").html(user.name);
+                    if (user.head == null) {
+                        user.head = "";
+                    }
+                    userPower = user.power;
+                    userLastLogin = user.last_login
+                    userLastLoginArea = user.last_area
+                    userPower = user.power
+                    userHeadImg = user.head
+                }
+            })
+        }
+
+    })
+
+    var element;
+    layui.use('element', function() {
+        element = layui.element;
+    });
+    var image_file;
+    var last_image_file;
+    var yu_ming = getYuMing();
+    layui.use('upload', function() {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem : '#index_image_upload' //绑定元素
+            ,
+            url : yu_ming + 'manage/indexImageUP' //上传接口
+            ,
+            method : "post",//put 请求
+            accept : "images",//文件类型 图片
+            acceptMime : 'image/*',//只显示图片
+            auto : false,
+            //bindAction : "#check_upload",
+            size : "2048",//大小限制单位kb
+            multiple : "true",//支持多文件上传
+            choose : function(obj) {
+                //将每次选择的文件追加到文件队列
+                var files = obj.pushFile();
+                $("#progressBar_div").attr("style", "display:none;");
+                $("#upload_success").attr("style", "display:none");
+                $("#upload_error").attr("style", "display:none");
+                //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                obj.preview(function(index, file, result) {
+                    image_file = file;
+
+                    $("#test_image").attr("src",
+                        "data:"+image_file.type+";base64" + result);
+                    $("#check_upload").attr("class", "layui-btn");
+                    $("upload_success").attr("style", "display:none;");
+                    $("upload_error").attr("style", "display:none;");
+                    //这里还可以做一些 append 文件列表 DOM 的操作
+                    //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
+                    //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
+                });
+            },
+            done : function(res, index, upload) {
+                //上传完毕回调
+                console.log(res);
+            },
+
+            error : function(res, index, upload) {
+                //请求异常回调
+                alert(res);
+                alert(index);
+                alert(upload);
+                alert("error");
+            }
+        });
+    });
+
+    function upLoading() {
+
+        if(userPower<3&&userPower>0){
+
+        }else{
+            alert("权限不足,无法添加图片");
+            return;
+        }
+
+        if (image_file == null) {
+            alert("请先选择上传文件");
+            return;
+        }
+        if (image_file == last_image_file) {
+            alert("请勿重复上传.");
+            return;
+        }
+        $("#progressBar_div").removeAttr("style");
+        var form = new FormData();
+        var FileController = yu_ming + 'manage/indexImageUP';
+        form.append("file", image_file);
+        form.append("title", $("#image_title").val());
+        form.append("url", $("#target_url").val());
+        form.append("webImage_url", $("#webImage_url").val());
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("post", FileController, true);
+        //xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  //设置请求头，使后台可用request.getParameter
+        xhr.onload = function(result) {
+            console.log(result);
+            console.log(xhr);
+            if (xhr.status == 200) {
+                var result = $.parseJSON(xhr.response);
+                console.log(result.result);
+                if (result.result == "success") {
+                    //传输成功
+                    last_image_file = image_file;
+                    $("#upload_error").attr("style", "display:none;");
+                    $("#upload_success").removeAttr("style");
+                } else {
+                    alert(decodeURI(result.msg));
+                    $("#upload_success").attr("style", "display:none;");
+                    $("#upload_error").removeAttr("style");
+                }
+            } else {
+                alert("服务器繁忙,请稍后再试或联系管理人员.");
+                $("#upload_error").removeAttr("style");
+                $("#upload_success").attr("style", "display:none;");
+            }
+
+        };
+        //xhr.upload.addEventListener("progress", progressFunction, false);
+        xhr.upload.onprogress = function(evt) {
+            var progressBar = $("#progressBar");
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                element.progress('progressBar', percentComplete + '%');
+                if (percentComplete == 100) {
+                    $("#upload_success").removeAttr("style");
+                    $("#upload_error").attr("style", "display:display;");
+                    last_image_file = image_file;
+                }
+            }
+        };
+
+        xhr.send(form);
+
+    }
+    function getImages(){
+        $.ajax({
+            url:yu_ming+"manage/getIndexImages",
+            type:"post",
+            scriptCharset: 'utf-8',
+            success:function(result){
+                var re = result.result;
+                var msg = result.msg;
+                if(re=="empty"){
+
+                }else if(re!="success"){
+
+                }
+                var data = result.data;
+                var imageList = result.list;
+                $("#image_show").empty();
+                for(var i=0;i<data.length;i++){
+                    var id = data[i].id;
+                    var url = data[i].url;
+                    var index = data[i].index;
+                    var title = data[i].title;
+                    $("#image_show").append(
+                        '<div class="example col-xs-3 col-md-3" style="margin-bottom:5px;" id="div_'+id+'"><p>'+'<img class="img-rounded zoomify" src="http://bigyangcode.xyz/hxy'+data[i].image_url+'" onerror="imageError(this)">'+
+                        '<div style="margin:5px;"><span class="text-info">标题:</span><input style="border-radius:6px;border: 1px solid gray;" type="text" placeholder="" id="title_'+data[i].id+'"></div>'+
+                        '<div style="margin:5px;"><span class="text-info">目标:</span><input style="border-radius:6px;border: 1px solid gray;" type="text" placeholder="" id="url_'+data[i].id+'"></div>'+
+                        '<input id="index_r1_'+id+'" type="radio" value="1" name="run_'+id+'"><span class="text-info">启用</span></input><input id="index_r2_'+id+'" type="radio" value="0" name="run_'+id+'"><span class="text-info">停用</span></input>  '+
+                        '<button class="layui-btn" onclick="updateIndexImage('+id+')">提交</button><button class="layui-btn layui-btn-danger" onclick="deleteIndexImage('+id+')">删除</button>'
+                        +'</p></div>'
+                    );
+                    if(title==null||title==""||title==0){
+                        $("#title_"+id+"").attr("placeholder","暂无");
+                    }else{
+                        $("#title_"+id+"").val(title);
+                    }
+                    if(url==null||url==""||url==0){
+                        $("#url_"+id+"").attr("placeholder","暂无");
+                    }else{
+                        $("#url_"+id+"").val(url);
+                    }
+
+                    if(index>0){
+                        $("#index_r1_"+id+"").prop("checked","checked");
+                    }else{
+                        $("#index_r2_"+id+"").prop("checked","checked");
+                    }
+                }
+                $(".example img").zoomify();
+            }
+        });
+    }
+    function imageError(item){
+        $(item).attr("src","./error/errorImage.jpg");
+    }
+    function deleteIndexImage(id){
+        $("#div_"+id).remove();
+        $.ajax({
+            data:{"id":id},
+            type:"post",
+            scriptCharset: 'utf-8',
+            url:yu_ming+"manage/deleteIndexImage",
+            success:function (result){
+                console.log(result);
+            }
+        })
+    }
+
+    function updateIndexImage(id){
+        var image_flag = $("#index_r1_"+id+"").prop("checked");
+        var image_index=0;
+        if(image_flag){
+            image_index=1;
+        }
+        var image_title=$("#title_"+id).val();
+        var image_url=$("#url_"+id).val();
+        $.ajax({
+            data:{
+                "image_index":image_index,
+                "image_title":image_title,
+                "image_url":image_url,
+                "id":id
+            },
+            url:yu_ming+"manage/updateIndexImage",
+            type:"post",
+            success:function (result){
+                console.log(result);
+                if(result.result=="success"){
+                    alert(result.msg);
+                }else{
+                    alert(result.msg)
+                }
+            }
+        })
+    }
+</script>
+
+<!--
+		<script type="text/javascript" src="./hxy_files/jquery.min.js"></script>
+		-->
+<script type="text/javascript" src="../js/zoomify.min.js"></script>
+<script type="text/javascript">
+    $(".example img").zoomify();
+</script>

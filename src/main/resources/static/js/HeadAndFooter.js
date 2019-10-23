@@ -224,7 +224,7 @@ function checkUserLogin(){
 					'<img id="userHead" src="'+yu_ming+'/head/'+head+'" style="border-radius:50%;width:40px;hight:40px;display: inline;margin-right: 5px;margin-top:20px;"  ></a>'
 				+'<ul class="sub_user" style="line-height:40px;margin-top:-17px; ">' +
 					'<li><a>'+webUser.userName+'</a></li>' +
-					'<li><a>用户中心</a></li>' +
+					'<li><a href="'+yu_ming+'/user/center">用户中心</a></li>' +
 					'<li><a>收藏</a></li>' +
 					'<li><a>消息</a></li>' +
 					'<li><a>浏览记录</a></li>' +
@@ -232,6 +232,10 @@ function checkUserLogin(){
 					'</ul></li>'
 				user_part.empty();
 				user_part.append(user_model);
+				$("#cancel").click();
+				return true;
+			}else{
+				return false;
 			}
 		}
 	})
