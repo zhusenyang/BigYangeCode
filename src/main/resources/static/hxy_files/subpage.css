@@ -1,0 +1,591 @@
+.common_color {
+	color: rgb(51, 62, 141);
+}
+.has_account a.common_color {
+	color: rgb(51, 62, 141);
+}
+.common_bg {
+	background-color: rgb(51, 62, 141);
+}
+.common_page a.nowpage {
+	background-color: rgb(51, 62, 141);
+}
+.common_page a:hover {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn1:hover {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn1.nowpage {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn2:hover {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn2.nowpage {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn3:hover {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn3.nowpage {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn4:hover {
+	background-color: rgb(51, 62, 141);
+}
+.vip_left_nav li.vip_left_btn4.nowpage {
+	background-color: rgb(51, 62, 141);
+}
+.vip_add_address a.common_bg {
+	background-color: rgb(51, 62, 141);
+}
+.vip_login li input.common_bg {
+	background-color: rgb(51, 62, 141);
+}
+.level_bg p.common_bg {
+	background-color: rgb(51, 62, 141);
+}
+.scrollbutton.smallImgUp:hover {
+	background-color: rgb(51, 62, 141);
+}
+.scrollbutton.smallImgDown:hover {
+	background-color: rgb(51, 62, 141);
+}
+.star_score_box p.common_bg {
+	background-color: rgb(51, 62, 141);
+}
+.view_img_btns input {
+	background-color: rgb(51, 62, 141);
+}
+.view_imgs .prev:hover {
+	background-color: rgb(51, 62, 141);
+}
+.view_imgs .next:hover {
+	background-color: rgb(51, 62, 141);
+}
+.common_border_color {
+	border-color: rgb(51, 62, 141);
+}
+.type_choose span.border_color {
+	border-color: rgb(51, 62, 141);
+}
+.type_choose2 span.border_color {
+	border-color: rgb(51, 62, 141);
+}
+.view_imgs .listBox .on img {
+	border-color: rgb(51, 62, 141);
+}
+.product_about_top span.on {
+	border-top-color: rgb(51, 62, 141);
+}
+.main {
+	margin: 0px auto 15px; width: 1002px; height: auto; overflow: hidden; padding-bottom: 26px; position: relative;
+}
+#contentLeft {
+	left: 0px; top: 0px; width: 240px; height: auto; position: absolute;
+}
+#contentRight {
+	width: 740px; height: auto; overflow: hidden; float: right;
+}
+.right {
+	overflow: hidden;
+}
+.right_con {
+	font: 14px/30px "microsoft yahei"; padding: 16px 0px; width: 100%; height: auto; overflow: hidden; font-size-adjust: none; font-stretch: normal;
+}
+.right_con div {
+	font-size: 14px;
+}
+.right_con p {
+	font-size: 14px;
+}
+.product1 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product2 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product3 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product4 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product5 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product6 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product7 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product7 li {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product8 {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product8 li {
+	width: 100%; height: auto; overflow: hidden;
+}
+.product1 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product2 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product3 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product4 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product5 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product6 li {
+	width: 33%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.product1 li > a {
+	margin: 3px auto; width: 88%; height: auto; overflow: hidden; display: block; position: relative;
+}
+.product2 li > a {
+	margin: 3px auto; width: 88%; height: auto; overflow: hidden; display: block; position: relative;
+}
+.product6 li > a {
+	margin: 3px auto; width: 88%; height: auto; overflow: hidden; display: block; position: relative;
+}
+.product1 li > a > img {
+	width: 215px; height: 162px; display: block;
+}
+.product2 li > a > img {
+	width: 215px; height: 162px; display: block;
+}
+.product3 li img {
+	width: 215px; height: 162px; display: block;
+}
+.product4 li div a img {
+	width: 215px; height: 162px; display: block;
+}
+.product5 li div a img {
+	width: 215px; height: 162px; display: block;
+}
+.product6 li a img {
+	width: 215px; height: 162px; display: block;
+}
+.product1 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product2 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product3 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product4 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product5 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product6 li > p {
+	font: 14px/42px "microsoft yahei"; margin: 0px auto; width: 88%; text-align: center; font-size-adjust: none; font-stretch: normal;
+}
+.product2 li > a > span {
+	background: url("../images/blackbg.png") 0px 0px; font: 14px/30px "microsoft yahei"; padding: 5%; transition:0.3s ease-in-out; left: 0px; top: 0px; width: 90%; height: 90%; color: rgb(255, 255, 255); overflow: hidden; display: block; position: absolute; font-size-adjust: none; font-stretch: normal; opacity: 0; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product2 li > a:hover span {
+	transition:0.3s ease-in-out; display: block; opacity: 1; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product3 li > div {
+	margin: 3px auto; width: 88%; height: auto; position: relative;
+}
+.product3 li > div > p {
+	background: url("../images/product_zoom.png") no-repeat 0px 0px; margin: -26px 0px 0px -26px; transition:0.5s ease-in-out; left: 50%; top: -100%; width: 53px; height: 53px; position: absolute; z-index: 1; cursor: pointer; -webkit-transition: all 0.5s ease-in-out 0s; -moz-transition: all 0.5s ease-in-out 0s;
+}
+.prod-zoom {
+	background: url("../images/product_zoom.png") no-repeat 0px 0px; margin: -26px 0px 0px -26px; transition:0.5s ease-in-out; left: 50%; top: -100%; width: 53px; height: 53px; position: absolute; z-index: 1; cursor: pointer; -webkit-transition: all 0.5s ease-in-out 0s; -moz-transition: all 0.5s ease-in-out 0s;
+}
+.product3 li > div:hover p {
+	transition:0.3s ease-in-out; top: 50%; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.prod7-left:hover p {
+	transition:0.3s ease-in-out; top: 50%; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.prod8-left:hover p {
+	transition:0.3s ease-in-out; top: 50%; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product4 li div {
+	margin: 3px auto; padding: 4px; border: 2px solid transparent; transition:0.3s ease-in-out; border-image: none; width: 88%; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product4 li div a {
+	width: 100%; overflow: hidden; display: block;
+}
+.product5 li div a {
+	width: 100%; overflow: hidden; display: block;
+}
+.product5 li div {
+	margin: 3px auto; padding: 6px; width: 88%; position: relative;
+}
+.product5 li div p {
+	transition:0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product5 li div:hover p {
+	transition:0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product6 li {
+	transition:0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.product6 li:hover {
+	transition:0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;
+}
+.pro5-border1 {
+	left: 0px; top: 0px; width: 0px; border-top-color: transparent; border-top-width: 2px; border-top-style: solid; position: absolute;
+}
+.pro5-border2 {
+	left: 0px; top: 0px; height: 0px; border-left-color: transparent; border-left-width: 2px; border-left-style: solid; position: absolute;
+}
+.pro5-border3 {
+	top: 0px; height: 0px; right: 0px; border-right-color: transparent; border-right-width: 2px; border-right-style: solid; position: absolute;
+}
+.pro5-border4 {
+	left: 0px; width: 0px; bottom: 0px; border-bottom-color: transparent; border-bottom-width: 2px; border-bottom-style: solid; position: absolute;
+}
+.product5 li div:hover p.pro5-border1 {
+	width: 100%;
+}
+.product5 li div:hover p.pro5-border4 {
+	width: 100%;
+}
+.product5 li div:hover p.pro5-border2 {
+	height: 100%;
+}
+.product5 li div:hover p.pro5-border3 {
+	height: 100%;
+}
+.product6 {
+	padding-top: 12px;
+}
+.product6 li {
+	top: 0px; position: relative;
+}
+.product6 li:hover {
+	top: -12px;
+}
+.product7 li {
+	padding-bottom: 16px;
+}
+.product8 li {
+	padding-bottom: 16px;
+}
+.prod7-left {
+	width: 31.25%; height: auto; overflow: hidden; float: left; position: relative;
+}
+.prod7-left a {
+	width: 100%; height: auto; overflow: hidden; display: block;
+}
+.prod8-left a {
+	width: 100%; height: auto; overflow: hidden; display: block;
+}
+.prod7-left a img {
+	width: 200px; height: 200px; display: block;
+}
+.prod8-left a img {
+	width: 200px; height: 150px; display: block;
+}
+.product7 li > p {
+	font: 16px/36px "microsoft yahei"; width: 63.43%; height: 36px; color: rgb(154, 154, 154); overflow: hidden; margin-left: 3.43%; float: left; font-size-adjust: none; font-stretch: normal;
+}
+.product7 li > p > a {
+	float: left;
+}
+.product8 li > p a {
+	float: left;
+}
+.product7 li > p > span {
+	float: right;
+}
+.product8 li > p span {
+	float: right;
+}
+.prod7-right {
+	font: 14px/30px "microsoft yahei"; width: 63.43%; height: 120px; color: rgb(124, 124, 124); overflow: hidden; margin-left: 3.43%; float: left; font-size-adjust: none; font-stretch: normal;
+}
+.product8 li > p {
+	font: 16px/36px "microsoft yahei"; width: 100%; height: 36px; color: rgb(154, 154, 154); overflow: hidden; font-size-adjust: none; font-stretch: normal;
+}
+.prod8-left {
+	width: 22.81%; height: auto; overflow: hidden; margin-right: 1.87%; float: left; position: relative;
+}
+.prod8-right {
+	font: 14px/30px "microsoft yahei"; width: 73.12%; height: 120px; color: rgb(124, 124, 124); overflow: hidden; float: left; font-size-adjust: none; font-stretch: normal;
+}
+#picShow {
+	background: url("../images/blackbg.png") 0px 0px; left: 0px; top: 0px; width: 100%; height: 100%; position: fixed; z-index: 9999;
+}
+.pic_show_box {
+	width: 100%; height: 100%; overflow: hidden; position: relative;
+}
+.pic_show_box img {
+	margin: 93px auto 0px; border: 5px solid rgba(255, 255, 255, 0.2); border-image: none; display: block;
+}
+#pic_quit {
+	background: url("../images/quit.png") no-repeat 0px 0px; top: 0px; width: 64px; height: 64px; right: 0px; position: absolute; cursor: pointer;
+}
+#lbtn {
+	background: url("../images/leftbtn1.png") no-repeat 0px 0px; left: 65px; top: 287px; width: 53px; height: 53px; display: block; position: absolute;
+}
+#rbtn {
+	background: url("../images/rightbtn1.png") no-repeat 0px 0px; top: 287px; width: 53px; height: 53px; right: 65px; display: block; position: absolute;
+}
+.pic_show_box p {
+	font: 18px/106px "microsoft yahei"; margin: 0px auto; width: 593px; text-align: center; color: rgb(12, 66, 1); overflow: hidden; white-space: nowrap; -ms-text-overflow: ellipsis; font-size-adjust: none; font-stretch: normal;
+}
+.pic_show_box p a {
+	color: rgb(255, 255, 255);
+}
+.news {
+	width: 100%; height: auto; overflow: hidden;
+}
+.news li {
+	background: url("../images/icons1.jpg") no-repeat 8px; font: 14px/50px "microsoft yahei"; width: 100%; height: 50px; color: rgb(29, 29, 29); text-indent: 19px; overflow: hidden; border-bottom-color: rgb(35, 35, 35); border-bottom-width: 1px; border-bottom-style: dotted; font-size-adjust: none; font-stretch: normal;
+}
+.news li a {
+	color: rgb(29, 29, 29); float: left;
+}
+.news li span {
+	float: right;
+}
+.news li.blank {
+	margin-bottom: 26px;
+}
+.news1 {
+	margin: 12px auto; width: 100%; height: auto; overflow: hidden;
+}
+.news1 li {
+	font: 14px/30px "microsoft yahei"; padding: 5px 0px; width: 100%; height: 30px; color: rgb(115, 115, 115); border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid; font-size-adjust: none; font-stretch: normal;
+}
+.news1 li a {
+	margin-left: 12px; float: left;
+}
+.news1 li span {
+	margin-right: 12px; float: right;
+}
+.news2 li {
+	border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.news3 li {
+	border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: dashed;
+}
+#news5 li.news4-bg {
+	background: rgb(238, 238, 238);
+}
+#news5 font {
+	transition:0.1s ease-in-out; -webkit-transition: all 0.1s ease-in-out 0s; -moz-transition: all 0.1s ease-in-out 0s;
+}
+.news_fadein li {
+	transition:0.3s ease-in-out; transform: rotateX(90deg); -webkit-transition: all 0.3s ease-in-out 0s; -webkit-transform: rotateX(90deg); -moz-transition: all 0.3s ease-in-out 0s; -moz-transform: rotateX(90deg);
+}
+.news_fadein li.show-animation {
+	transition:0.3s ease-in-out; transform: rotateX(0deg); -webkit-transition: all 0.3s ease-in-out 0s; -webkit-transform: rotateX(0deg); -moz-transition: all 0.3s ease-in-out 0s; -moz-transform: rotateX(0deg);
+}
+.news_fadein li:nth-child(1).show-animation {
+	transition-delay: 100ms; -webkit-transition-delay: 100ms; -moz-transition-delay: 100ms;
+}
+.news_fadein li:nth-child(2).show-animation {
+	transition-delay: 200ms; -webkit-transition-delay: 200ms; -moz-transition-delay: 200ms;
+}
+.news_fadein li:nth-child(3).show-animation {
+	transition-delay: 300ms; -webkit-transition-delay: 300ms; -moz-transition-delay: 300ms;
+}
+.news_fadein li:nth-child(4).show-animation {
+	transition-delay: 400ms; -webkit-transition-delay: 400ms; -moz-transition-delay: 400ms;
+}
+.news_fadein li:nth-child(5).show-animation {
+	transition-delay: 500ms; -webkit-transition-delay: 500ms; -moz-transition-delay: 500ms;
+}
+.news_fadein li:nth-child(6).show-animation {
+	transition-delay: 600ms; -webkit-transition-delay: 600ms; -moz-transition-delay: 600ms;
+}
+.news_fadein li:nth-child(7).show-animation {
+	transition-delay: 700ms; -webkit-transition-delay: 700ms; -moz-transition-delay: 700ms;
+}
+.news_fadein li:nth-child(8).show-animation {
+	transition-delay: 800ms; -webkit-transition-delay: 800ms; -moz-transition-delay: 800ms;
+}
+.news_fadein li:nth-child(9).show-animation {
+	transition-delay: 900ms; -webkit-transition-delay: 900ms; -moz-transition-delay: 900ms;
+}
+.news_fadein li:nth-child(10).show-animation {
+	transition-delay: 1000ms; -webkit-transition-delay: 1000ms; -moz-transition-delay: 1000ms;
+}
+.news_fadein li:nth-child(11).show-animation {
+	transition-delay: 1100ms; -webkit-transition-delay: 1100ms; -moz-transition-delay: 1100ms;
+}
+.news_fadein li:nth-child(12).show-animation {
+	transition-delay: 1200ms; -webkit-transition-delay: 1200ms; -moz-transition-delay: 1200ms;
+}
+.news_fadein li:nth-child(13).show-animation {
+	transition-delay: 1300ms; -webkit-transition-delay: 1300ms; -moz-transition-delay: 1300ms;
+}
+.news_fadein li:nth-child(14).show-animation {
+	transition-delay: 1400ms; -webkit-transition-delay: 1400ms; -moz-transition-delay: 1400ms;
+}
+.news_fadein li:nth-child(15).show-animation {
+	transition-delay: 1500ms; -webkit-transition-delay: 1500ms; -moz-transition-delay: 1500ms;
+}
+.news_indent li a {
+	transition:0.1s ease-in-out; text-indent: 0px; -webkit-transition: all 0.1s ease-in-out 0s; -moz-transition: all 0.1s ease-in-out 0s;
+}
+.news_indent li:hover a {
+	transition:0.2s ease-in-out; text-indent: 20px; -webkit-transition: all 0.2s ease-in-out 0s; -moz-transition: all 0.2s ease-in-out 0s;
+}
+.view-title {
+	font: 20px/36px "microsoft yahei"; padding: 14px 0px 0px; width: 100%; text-align: center; color: rgb(51, 51, 51); font-size-adjust: none; font-stretch: normal;
+}
+.view-date {
+	font: 12px/24px "microsoft yahei"; width: 100%; text-align: center; color: rgb(153, 153, 153); font-size-adjust: none; font-stretch: normal;
+}
+.view-date span {
+	margin: 0px 7px;
+}
+.view-share {
+	margin: 0px auto; width: 140px;
+}
+.view-pages {
+	margin: 20px auto; width: 100%; height: auto; overflow: hidden;
+}
+.view-pages p {
+	width: 100%; height: 30px; overflow: hidden; border-bottom-color: rgb(221, 221, 221); border-bottom-width: 1px; border-bottom-style: dashed; white-space: nowrap; -ms-text-overflow: ellipsis;
+}
+.view-back {
+	font: 14px/30px "microsoft yahei"; margin: 10px auto; width: 100px; height: 30px; text-align: center; display: block; font-size-adjust: none; font-stretch: normal;
+}
+#left-type {
+	width: 100%; height: auto; overflow: hidden;
+}
+#left-type li {
+	margin: 5px 0px; width: 100%; line-height: 31px; background-color: rgb(255, 255, 255);
+}
+#left-type li a {
+	height: 31px; color: rgb(122, 122, 122); text-indent: 15px; overflow: hidden; font-size: 14px; font-weight: bold; display: block; white-space: nowrap; -ms-text-overflow: ellipsis;
+}
+#left-type li a:hover {
+	color: rgb(255, 255, 255) !important; background-color: rgb(219, 14, 52);
+}
+#left-type > li > ul > li {
+	margin: 0px; border-bottom-color: currentColor; border-bottom-width: 0px; border-bottom-style: none;
+}
+#left-type > li > ul > li > a {
+	padding: 3px 0px; font-size: 14px; border-bottom-color: rgb(203, 203, 203); border-bottom-width: 1px; border-bottom-style: solid; background-color: rgb(240, 240, 240);
+}
+#left-type > li > ul:last-child li a:last-child {
+	border-bottom-color: currentColor; border-bottom-width: 0px; border-bottom-style: none;
+}
+#left-type > li > ul > li > ul > li > a {
+	text-indent: 40px;
+}
+#left-type > li > ul > li > a:hover {
+	color: rgb(0, 0, 0) !important; background-color: rgb(240, 240, 240) !important;
+}
+#left-type > li > ul > li > ul > li > ul > li > a {
+	text-indent: 55px;
+}
+#left-type > li > ul > li > ul > li > ul > li > ul > li > a {
+	text-indent: 70px;
+}
+#left-type li ul {
+	display: none;
+}
+#left-type li ul.show > li > ul {
+	display: block;
+}
+#left-type li a.on {
+	background: rgb(219, 14, 52) !important; margin: 0px !important; color: rgb(255, 255, 255);
+}
+.pg-color {
+	color: rgb(122, 122, 122);
+}
+.pg-border-color {
+	border-color: rgb(51, 62, 141);
+}
+.product4 li div:hover {
+	border-color: rgb(51, 62, 141);
+}
+.pg-color:hover {
+	color: rgb(219, 14, 52);
+}
+.view h1 {
+	font: 16px/30px "microsoft yahei"; width: 100%; text-align: center; color: rgb(52, 52, 52); font-size-adjust: none; font-stretch: normal;
+}
+.date {
+	font: 12px/32px "microsoft yahei"; width: 100%; text-align: center; color: rgb(125, 125, 125); font-size-adjust: none; font-stretch: normal;
+}
+.page {
+	margin: 10px auto; width: 100%; overflow: hidden; position: relative;
+}
+.page p {
+	font: 12px/28px "microsoft yahei"; width: 100%; height: 28px; color: rgb(29, 29, 29); overflow: hidden; font-size-adjust: none; font-stretch: normal;
+}
+.page p a {
+	color: rgb(29, 29, 29);
+}
+.page p a:hover {
+	text-decoration: underline;
+}
+.back:hover {
+	text-decoration: underline;
+}
+.back {
+	background: rgb(51, 62, 141); font: 14px/39px "microsoft yahei"; margin: 10px auto 0px; border-radius: 4px; width: 138px; text-align: center; color: rgb(255, 255, 255); display: block; font-size-adjust: none; font-stretch: normal;
+}
+.view img {
+	display: inline; max-width: 100%;
+}
+.view div {
+	font-size: 14px;
+}
+.pdf_down {
+	background: url("../images/pdf.jpg") no-repeat 0px 0px; font: 14px/46px "microsoft yahei"; margin: 10px auto; width: 224px; height: 46px; color: rgb(255, 255, 255); text-indent: 74px; display: block; font-size-adjust: none; font-stretch: normal;
+}
+.white-bg {
+	background: rgb(255, 255, 255); padding: 10px 0px;
+}
+#allmap {
+	margin: 20px 0px; height: 300px;
+}
+.con1 {
+	margin: 0px auto; width: 1002px; height: 480px; overflow: hidden;
+}
+.con1-left {
+	background: rgb(240, 240, 240); width: 240px; height: auto; overflow: hidden; margin-bottom: 7px;
+}
+.left-title1 {
+	font: 18px/normal "microsoft yahei"; width: 100%; height: 63px; text-align: left; color: rgb(255, 255, 255); font-size-adjust: none; font-stretch: normal;
+}
+.class_up {
+	background: url("../images/left_top.jpg") no-repeat -11px 0px; margin: 11px 0px 8px 13px; width: 213px; height: 19px; display: block;
+}
+.class_down {
+	background: url("../images/left_bottom.jpg") no-repeat -11px 0px; margin: 8px auto 13px; width: 213px; height: 19px; display: block;
+}
+.con1_class {
+	margin: 0px 13px; width: 212px; height: 335px; overflow: hidden; position: relative;
+}
+.con1_class > ul {
+	left: 0px; top: 0px; width: 100%; position: absolute;
+}
+.con1_class ul li {
+	font: 14px/41px "microsoft yahei"; padding: 0px; width: 195px; color: rgb(29, 29, 29); overflow: hidden; font-size-adjust: none; font-stretch: normal;
+}
+.con1_class ul li a {
+	color: rgb(29, 29, 29);
+}
+.con1_class > ul > li > a {
+	background: none;
+}
+.child_top {
+	height: 280px; position: relative;
+}

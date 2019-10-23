@@ -6,16 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <base href="http://bigyangcode.xyz/hxy/" />
         <title>登入网站管理系统</title>
         <!-- Bootstrap core CSS -->
-        <link href="./manage/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="../manage/bootstrap/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="./manage/style.css" rel="stylesheet">
+        <link href="../manage/style.css" rel="stylesheet">
     </head>
     <body>
         <div class="text-center bg-dark">
-            <div style="background-image: url('./manage/image/welcome_login3.jpg');background-repeat: no-repeat;background-size:100% 100%">
+            <div style="background-image: url('../manage/image/welcome_login3.jpg');background-repeat: no-repeat;background-size:100% 100%">
                 <br>
                 <br>
                 <br>
@@ -62,11 +61,9 @@
                        
             <DIV class="footer">
                 <DIV class="f_content">
-                    地址：杭州 电话：021-31261588 手机：上海13764925328 / 13723735508 
-                    <BR>技术支持：
-                    <a title="竺森洋" href="bigyangcode.xyz">竺森洋</a> 
-                    杭州远成超声波有限公司 版权所有：杭州远成超声波
-                </DIV>                 
+                    地址：浙江省杭州市富阳区银湖街道银湖创新中心1号楼1003室 0571-23281862  手机:18767139861                    <BR>
+                    <a title="技术支持" href="http://bigyangcode.xyz">技术支持</a> 
+                    版权所有：杭州远成超声波科技有限公司                </DIV>                 
                 <DIV class="share_i">
 </DIV>                 
             </DIV>             
@@ -76,13 +73,12 @@
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
-<script src="./manage/assets/js/jquery.min.js"></script>
-<script src="./manage/assets/js/popper.js"></script>
-<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script src="../manage/assets/js/popper.js"></script>
+<script src="https://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="./manage/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="../manage/assets/js/ie10-viewport-bug-workaround.js"></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
-<script src="./config/config.js"></script>
 <script type="text/javascript">
 	function verifyUserName(){
 		var user_name = $("#userName").val();
@@ -93,6 +89,7 @@
 			return false;
 		}
 	}
+	
 	function nameOut(){
 		if (verifyUserName()){
 				$("#login-button").removeAttr("disabled");
@@ -100,11 +97,13 @@
 			$("#login-button").attr("disabled","disabled");
 		}
 	}
+	
 	function passwordOut(){
 			if (verifyPassword()){
 				$("#login-button").removeAttr("disabled");
 			}
 	}
+	
 	function verifyPassword(){
 		var password = $("#password").val();
 		if(password.length>5&password.length<20){
@@ -116,32 +115,38 @@
 			return false;
 		}
 	}
+	
 	function toLogin(){
-		var yu_ming = getYuMing();
-		
+		var yu_ming = document.domain;
+		if(yu_ming.indexOf("localhost")>-1){
+			yu_ming="http://"+yu_ming+":8080/"
+		}else{
+			yu_ming="http://"+yu_ming+"/";
+		}
 		var user_name = $("#userName").val();
 		var password = $("#password").val();
 		$.ajax({
-			url:yu_ming+"manage/login",
+			url:yu_ming+"login",
 			type	:"post",
+			dataType:"json",
 			data:{
 				"userName":user_name,
 				"password":password
 			},
 			success:function(result){
-		       if(result.toString()=="error"){
-		    	   $("#warning_title").text("账号/密码错误");
-		       }else if(result.toString()=="success"){
-		    	   alert("账号密码正确");
+		       if(result.result.toString()=="error"){
+		    	   $("#warning_title").text(result.msg);
+		       }else if(result.result.toString()=="success"){
 		    	   //window.location.href=yu_ming+"manage";
 		    	   location.reload()
 		       }
 		   },
-		   error : function() {  
-	            alert("服务器繁忙请刷新页面，或稍后再试.");  
+		   error : function() {
+			   alert("服务器繁忙")
 	        }//执行失败的代码  
 		})
 	}
+	
 	function inputUserName(event){
 		var key = event.which || event.keyCode;
 		//13回车
@@ -163,6 +168,7 @@
 			}
 		
 	}
+	
 	function inputPassword(event){
 		var key = event.which || event.keyCode;
 			if(verifyUserName()&verifyPassword()){
@@ -172,8 +178,7 @@
 			}else{
 				$("#warning").text("请正确填写账号密码");
 			}
-		
 	}
 </script>
-<link href="./hxy_files/style.css" rel="stylesheet">
-<link href="./hxy_files/subpage.css" rel="stylesheet"> 
+<link href="../hxy_files/style.css" rel="stylesheet">
+<link href="../hxy_files/subpage.css" rel="stylesheet"> 
