@@ -65,7 +65,8 @@ public class ShiroConfiguration {
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionManager.put("/logout", "logout");
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
-        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
+        filterChainDefinitionManager.put("/user/**", "anon");
+        filterChainDefinitionManager.put("/manage/**", "anon");
 //        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
 //        filterChainDefinitionManager.put("/login", "anon");
 //        filterChainDefinitionManager.put("/index", "anon");

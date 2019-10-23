@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="text-lowercase bg-secondary">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <base href="http://bigyangcode.xyz/hxy/" />
+        <title>登入网站管理系统</title>
+        <!-- Bootstrap core CSS -->
+        <link href="./manage/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="./manage/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="text-center bg-dark">
+            <div style="background-image: url('./manage/image/welcome_login3.jpg');background-repeat: no-repeat;background-size:100% 100%">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div style="width:300px;margin-left:auto;margin-right:auto;border-radius:6px;background-color:rbg(0,230,255);" class="bg-light">
+                    <br>
+                    <span class="text-info">欢迎登入网站管理系统.</span>
+                    <br>
+                    <br>
+                    <span class="text-info">账号:</span>
+                    <input id="userName" type="text"  onblur="nameOut()" onkeypress="inputUserName(event)" laceholder="请输入账号.." style="border-radius:6px;border: 1px solid gray;">
+                    <span id="name_error" class="text-danger">&nbsp;</span>
+                    <br>
+                    <br>
+                    <span class="text-info"  >密码:</span>
+                    <input id="password" onblur="passwordOut()"  onkeypress="inputPassword(event)" type="password" style="border-radius:6px;border: 1px solid gray;">
+                    <span id="password_error" class="text-danger">&nbsp;</span>
+                    <br>
+                    <span class="text-danger" id="warning_title">&nbsp;</span>
+                    <div class="btn-group-sm">
+                        <button id="login-button" type="button" class="btn btn-default bg-secondary text-light" onclick="toLogin()" >登入							</button>
+                    </div>
+                    <br>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+        <!-- 底部开始 -->
+        <DIV class="footer_c">
+        <br>
+                       
+            <DIV class="footer">
+                <DIV class="f_content">
+                    地址：杭州 电话：021-31261588 手机：上海13764925328 / 13723735508 
+                    <BR>技术支持：
+                    <a title="竺森洋" href="bigyangcode.xyz">竺森洋</a> 
+                    杭州远成超声波有限公司 版权所有：杭州远成超声波
+                </DIV>                 
+                <DIV class="share_i">
+</DIV>                 
+            </DIV>             
+        </DIV>         
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+    </body>
+</html>
+<script src="./manage/assets/js/jquery.min.js"></script>
+<script src="./manage/assets/js/popper.js"></script>
+<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="./manage/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script src="./config/config.js"></script>
+<script type="text/javascript">
+	function verifyUserName(){
+		var user_name = $("#userName").val();
+		if(user_name.length>1&user_name.length<20){
+				$("#login-button").removeAttr("disabled");
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function nameOut(){
+		if (verifyUserName()){
+				$("#login-button").removeAttr("disabled");
+		}else{
+			$("#login-button").attr("disabled","disabled");
+		}
+	}
+	function passwordOut(){
+			if (verifyPassword()){
+				$("#login-button").removeAttr("disabled");
+			}
+	}
+	function verifyPassword(){
+		var password = $("#password").val();
+		if(password.length>5&password.length<20){
+			if (verifyUserName()){
+				$("#login-button").removeAttr("disabled");
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function toLogin(){
+		var yu_ming = getYuMing();
+		
+		var user_name = $("#userName").val();
+		var password = $("#password").val();
+		$.ajax({
+			url:yu_ming+"manage/login",
+			type	:"post",
+			data:{
+				"userName":user_name,
+				"password":password
+			},
+			success:function(result){
+		       if(result.toString()=="error"){
+		    	   $("#warning_title").text("账号/密码错误");
+		       }else if(result.toString()=="success"){
+		    	   alert("账号密码正确");
+		    	   //window.location.href=yu_ming+"manage";
+		    	   location.reload()
+		       }
+		   },
+		   error : function() {  
+	            alert("服务器繁忙请刷新页面，或稍后再试.");  
+	        }//执行失败的代码  
+		})
+	}
+	function inputUserName(event){
+		var key = event.which || event.keyCode;
+		//13回车
+		
+			var user_name = $("#userName").val();
+			if(user_name.length!=0){
+				var flag = verifyUserName();
+				if(flag){
+					if(key==13){
+						var $password = $("#password");
+						$password.focus();
+					}	
+				}else{
+					$("#warning").text("请输入正确密码");
+				}
+			}else{
+				$("#warning").text("账号不可为空");
+				//$("#name_error").css("background-image","url(on.jpg)");
+			}
+		
+	}
+	function inputPassword(event){
+		var key = event.which || event.keyCode;
+			if(verifyUserName()&verifyPassword()){
+				if(key==13){
+					toLogin();
+				}
+			}else{
+				$("#warning").text("请正确填写账号密码");
+			}
+		
+	}
+</script>
+<link href="./hxy_files/style.css" rel="stylesheet">
+<link href="./hxy_files/subpage.css" rel="stylesheet"> 

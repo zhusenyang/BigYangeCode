@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<base href="http://localhost:8080/hxy/" />
+
+<title>网站管理系统</title>
+
+<link rel="stylesheet" href="./layui/css/layui.css">
+<script type="text/javascript" src="./hxy_files/jquery.js"></script>
+<style type="text/css">
+.component{
+	padding: 15px;
+	background-color: teal;
+	color:white;
+}
+</style>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">网站管理系统</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item"><a href="javascript:;"> <img
+						src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span
+						id="user_name">用户名</span>
+				</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="javascrpt:;">基本资料</a>
+						</dd>
+						<dd>
+							<a href="">安全设置</a>
+						</dd>
+					</dl></li>
+				<li class="layui-nav-item"><a href="javascript:;">登出</a></li>
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul id="left_order" class="layui-nav layui-nav-tree"
+					lay-filter="test">
+					<li class="layui-nav-item"><a href="">主页</a></li>
+					<li class="layui-nav-item layui-nav-itemed"><a class=""
+						href="javascript:;">产品中心</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="javascript:;">类别</a>
+							</dd>
+							<dd>
+								<a href="javascript:;">产品</a>
+							</dd>
+						</dl></li>
+
+					<!--  
+        <li class="layui-nav-item">
+          <a href="javascript:;">解决方案</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+          </dl>
+        </li>
+        -->
+					<li class="layui-nav-item"><a href="">客户案例</a></li>
+					<li class="layui-nav-item"><a href="">人才招聘</a></li>
+					<li class="layui-nav-item"><a href="">用户管理</a></li>
+					<li class="layui-nav-item"><a href="">日志</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="layui-body" >
+			<!-- 内容主体区域 -->
+			<div style="padding: 0px;">
+				<div class="component" id="home_set"  style="">
+					<h2>主页设置</h2>
+					<i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe60c;</i>  
+					<div>尚未开通</div>
+				</div>
+			</div>	
+		</div>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			<a href="http://bigyangcode.xyz">© - 杭州远成超声波</a>
+		</div>
+	</div>
+	<script src="./layui/layui.js"></script>
+	<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+</script>
+<script type="text/javascript" src="./config/config.js"></script>
+<script type="text/javascript">
+	$(function getUser(){
+		var yu_ming = getYuMing();
+		$.ajax({
+			url:yu_ming+"manage/getUser",
+			type	:"post",
+			success:function(result){
+				var user = $.parseJSON(result);
+				console.info(user);
+				console.info(user.id);
+				console.info(user.name);
+				$("#user_name").html(user.name);
+				if(user.head==null){
+					user.head="";
+				}
+				console.info(user.last_login);
+				console.info(user.last_area);
+				console.info(user.power);
+				console.info(user.head);
+		   }
+		})
+	})
+</script>
+</body>
+</html>
+
