@@ -754,7 +754,7 @@
 			error : function(res, index, upload) {
 				//请求异常回调
 				alert(res);
-				alert(index);
+				alert(demo);
 				alert(upload);
 				alert("error");
 			}
@@ -825,9 +825,7 @@
 				}
 			}
 		};
-
 		xhr.send(form);
-
 	}
 	function getImages() {
 		$
@@ -849,7 +847,7 @@
 						for (var i = 0; i < data.length; i++) {
 							var id = data[i].id;
 							var url = data[i].url;
-							var index = data[i].index;
+							var index = data[i].demo;
 							var title = data[i].title;
 							//alert(data[i].image_url)
 							$("#image_show")
@@ -879,7 +877,7 @@
 								$("#url_" + id + "").val(url);
 							}
 
-							if (index > 0) {
+							if (demo > 0) {
 								$("#index_r1_" + id + "").prop("checked",
 										"checked");
 							} else {
@@ -1048,7 +1046,7 @@
 										obj
 												.preview(function(index, file,
 														result) {
-													console.log(index); //得到文件索引
+													console.log(demo); //得到文件索引
 													console.log(file);
 													product_face_image = file; //得到文件对象
 													console
@@ -1060,7 +1058,7 @@
 													$(
 															"#product_face_image_show")
 															.append(
-																	'<span style="color: maroon;">封面预览</span><br><img style="width:200;height:150px;" src="'+result+'" >')
+																	'<span style="color: maroon;">封面预览</span><br><img style="width:200px;height:150px;" src="'+result+'" >')
 												});
 									},
 									done : function(res) {
@@ -1105,7 +1103,7 @@
 													filePath = year + "-" + yue
 															+ "-" + date + "-"
 															+ h + "/" + title;
-													console.log(index); //得到文件索引
+													console.log(demo); //得到文件索引
 													console.log(file);
 													//var i = product_image_list.length
 													//product_image_list[i]=file;
@@ -1317,7 +1315,7 @@ var dateStr2=dataStr[1].split(":")
 
 				//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
 				obj.preview(function(index, file, result) {
-					console.log(index); //得到文件索引
+					console.log(demo); //得到文件索引
 					console.log(file); //得到文件对象
 					console.log(result); //得到文件base64编码，比如图片
 					$("#logo_show").empty();
@@ -1666,7 +1664,7 @@ var dateStr2=dataStr[1].split(":")
 										obj
 												.preview(function(index, file,
 														result) {
-													console.log(index); //得到文件索引
+													console.log(demo); //得到文件索引
 													console.log(file); //得到文件对象
 													console.log(result); //得到文件base64编码，比如图片
 													var title = $(

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../layui/layui.js"></script>
+    <title>网站管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">网站管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="javascript:;">
+                <img class="layui-nav-img">
+                <span id="user_name">用户名</span>
+            </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascrpt:;">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="">安全设置</a>
+                    </dd>
+                </dl></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">登出</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul id="left_order" class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">轮播图设置</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">logo设置</a>
+                        </dd>
+                    </dl></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 0px;">
+            <div class="" id="home_set" style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">新增轮播图</li>
+                        <li >删改轮播图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            11
+                        </div>
+                        <div class="layui-tab-item">
+                            <div id="image_show">
+                                222
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <a href="http://bigyangcode.xyz">© - bigyangcode</a>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var element;
+    layui.use('element', function() {
+        element = layui.element;
+    });
+</script>

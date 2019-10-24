@@ -233,7 +233,7 @@ var	$View = function( str ){
 						$('.optionsBox').hide();
 					},
 					selected : function(el){
-						var i = $optionsInnerEl.children('.optionBox').index(el);
+						var i = $optionsInnerEl.children('.optionBox').demo(el);
 						$optionsInnerEl.children('.optionBox').removeClass('selected');
 						$(el).addClass('selected');
 						$sLtEl.text($(el).text());

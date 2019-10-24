@@ -1,4 +1,6 @@
-# BigYangeCode
+# BigYangeCode-changelog
+# 2019年10月24日
+解决layui组件bug.资源在转移过程中发生代码缺失引起.
 MyWebsite
 # 1.00
 初步构建项目

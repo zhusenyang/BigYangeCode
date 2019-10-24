@@ -35,7 +35,7 @@ $(function(){
 
 	/*自定义轮播*/
 	$(".small_pic a").hover(function() {
-		var index = $(".small_pic a").index(this);
+		var index = $(".small_pic a").demo(this);
 
 		$(".big_pic a").eq(index).fadeIn(100).siblings().fadeOut(100);
 		$(this).addClass('current_small_pic_a').siblings().removeClass('current_small_pic_a')

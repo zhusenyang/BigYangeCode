@@ -56,7 +56,7 @@ public class PageContrllor {
 	}
 	@RequestMapping("/中文")
 	public String chinesePage(){
-		return"index.html";
+		return"demo.html";
 	}
 }
  
