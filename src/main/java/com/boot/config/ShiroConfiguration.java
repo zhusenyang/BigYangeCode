@@ -63,9 +63,9 @@ public class ShiroConfiguration {
         // 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        filterChainDefinitionManager.put("/logout", "logout");
+        filterChainDefinitionManager.put("/logout", "anon");
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
-        filterChainDefinitionManager.put("/user/**", "anon");
+        filterChainDefinitionManager.put("/user/**", "authc");//登入用户
         filterChainDefinitionManager.put("/manage/**", "anon");
 //        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
 //        filterChainDefinitionManager.put("/login", "anon");
@@ -74,7 +74,6 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/getMenu", "anon");
         filterChainDefinitionManager.put("/", "anon");
         filterChainDefinitionManager.put("/game", "anon");
-
         filterChainDefinitionManager.put("/statistic/**",  "anon");
 //        filterChainDefinitionManager.put("/**",  "authc,roles[user]");//其他资源全部拦截
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);

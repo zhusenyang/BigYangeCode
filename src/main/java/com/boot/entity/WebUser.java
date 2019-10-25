@@ -41,6 +41,30 @@ public class WebUser implements Serializable {
 	 * 邮箱
 	 */
 	private String eMail;
+	/**
+	 * 性别
+	 */
+	private String sex;
+	/**
+	 * 简介
+	 */
+	private String introduction;
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
 	public String getHead() {
 		return head;

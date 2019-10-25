@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script src="../js/config.js"></script>
     <script src="../layui/layui.js"></script>
     <title>网站管理系统</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
@@ -28,7 +29,7 @@
                     </dd>
                 </dl></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">登出</a>
+                <a href="javascript:;" onclick="logOut()">登出</a>
             </li>
         </ul>
     </div>
@@ -56,17 +57,40 @@
             <div class="" id="home_set" style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">新增轮播图</li>
-                        <li >删改轮播图</li>
+                        <li class="layui-this">基本信息</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            11
-                        </div>
-                        <div class="layui-tab-item">
-                            <div id="image_show">
-                                222
-                            </div>
+                            <form class="layui-form layui-col-sm7" action="" >
+                                <div class="layui-form-item">
+
+                                    <label class="layui-form-label">昵称</label>
+                                    <div class="layui-input-inline">
+                                        <input id="nicoName-info" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux"></div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">单选框</label>
+                                    <div class="layui-input-block">
+                                        <input id="man" type="radio" name="sex" value="男" title="男"checked>
+                                        <input id="women" type="radio" name="sex" value="女" title="女" >
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">文本域</label>
+                                    <div class="layui-input-block">
+                                        <textarea id="introduction" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -82,8 +106,54 @@
 </body>
 </html>
 <script type="text/javascript">
+    var user ;
     var element;
     layui.use('element', function() {
         element = layui.element;
     });
+    var layer
+    layui.use(['layer', 'form'], function(){
+             layer = layui.layer
+            ,form = layui.form;
+    });
+    //获取用户信息
+    $(function () {
+        $.ajax({
+            url: yu_ming+"/user/getInfo",
+            type : "post",
+            scriptCharset : 'utf-8',
+            success: function(result){
+                if(result.stateNum==200){
+                    var data = result.data;
+                    user=data;
+                    if(user.nicoName==null){
+                        $("#nicoName-info").val(user.userName);
+                    }else {
+                        $("#nicoName-info").val(user.nicoName);
+                    }
+                    if (user.sex=="man"){
+                        $("#man").click();
+                    }else {
+                        $("#woman").click();
+                    }
+                    $("#introduction").val(user.introduction);
+                }
+            }
+        });
+    })
+
+    //登出
+    function logOut(){
+        $.ajax({
+            url: yu_ming+"/user/logout",
+            type : "post",
+            scriptCharset : 'utf-8',
+            success: function(result){
+                if(result.stateNum==200){
+                    layer.msg("退出成功,返回主页s.")
+                    window.location.href=yu_ming;
+                }
+            }
+        });
+    }
 </script>

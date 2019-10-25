@@ -1,14 +1,12 @@
 package com.boot.config;
 
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -19,7 +17,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class C3P0DataSource {
-	
+	Logger logger= LogManager.getLogger(C3P0DataSource.class);
 	
 	@Bean(name = "dataSource")
 	@Primary
@@ -34,7 +32,7 @@ public class C3P0DataSource {
 			dataSource.setDriverClass("com.mysql.jdbc.Driver");
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
-			System.out.println("找不到驱动！！！");
+			logger.info("找不到驱动！！！");
 			e.printStackTrace();
 		}
 		dataSource.setMinPoolSize(5);
@@ -52,7 +50,7 @@ public class C3P0DataSource {
 //		Connection conn = dataSource.getConnection();
 //		System.out.println("conn="+conn);
 //		return DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
-		System.out.println("加载连接池");
+		logger.info("C3P0连接池初始化完毕.");
 		return dataSource;
 	}
 }

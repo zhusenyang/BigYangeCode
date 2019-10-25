@@ -119,12 +119,19 @@ public class PublicServiceController {
 	 * 用户登出
 	 * @return
 	 */
-	@RequestMapping("/logOut")
+	@RequestMapping("/logout")
 	@ResponseBody
 	public Message logOut(){
-		Message msg = Message.createMessage();
+		logger.info("用户注销.");
+		Message msg = new Message();
 		Subject currentUser = SecurityUtils.getSubject();
-		currentUser.logout();
+		if (currentUser!=null){
+			currentUser.logout();
+			msg.setStateNum(Message.SUCCESS_NUM);
+		}else{
+			msg.setStateNum(Message.USER_NO_LOGIN);
+			msg.setContent("用户并未登入.");
+		}
 		return msg;
 	}
 }

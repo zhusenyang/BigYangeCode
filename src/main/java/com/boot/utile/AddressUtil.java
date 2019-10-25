@@ -40,6 +40,9 @@ public class AddressUtil {
             String[] ipArray = ip.split(",");
             ip = ipArray[0];
         }
+        if (ip==null){
+            ip=request.getRemoteAddr();
+        }
         return ip;
     }
 

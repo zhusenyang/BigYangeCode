@@ -1,11 +1,13 @@
 package com.boot.controller;
 
+import com.boot.dao.UserDao;
 import com.boot.entity.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.LoggerNameAwareMessage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +22,14 @@ import com.boot.entity.WebUser;
 @RequestMapping("/user")
 @Controller
 public class UserServiceController {
+
 	Logger logger = LogManager.getLogger(UserServiceController.class);
+	/**
+	 * 用户dao层
+	 */
+	@Autowired
+	UserDao userDao;
+
 	/**
 	 * @param token 用户登入认证密钥
 	 * @return 返回用户类
@@ -33,7 +42,11 @@ public class UserServiceController {
 
 	@RequestMapping("/center")
 	public String center(){
-		return "index.html";
+		Subject cuser = SecurityUtils.getSubject();
+		if (cuser.isAuthenticated()){
+			return "index.html";
+		}
+		return "login.html";
 	}
 
 	@RequestMapping("/like")
@@ -64,6 +77,19 @@ public class UserServiceController {
 		}else{
 			msg.setStateNum(Message.USER_NO_LOGIN);
 			msg.setContent("用户并未登入.");
+		}
+		return msg;
+	}
+
+	@RequestMapping("/getInfo")
+	@ResponseBody
+	public Message getUserInfo(){
+		Message msg = new Message();
+		Subject cuser = SecurityUtils.getSubject();
+		if (cuser.isAuthenticated()){
+			WebUser webUser = (WebUser) SecurityUtils.getSubject().getPrincipal();
+			msg.setStateNum(Message.SUCCESS_NUM);
+			msg.setData(webUser);
 		}
 		return msg;
 	}

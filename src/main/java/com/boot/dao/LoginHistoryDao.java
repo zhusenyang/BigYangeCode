@@ -10,7 +10,6 @@ import java.util.Date;
 @Mapper
 public interface LoginHistoryDao {
 
-//    @Insert("insert into loginhistory(ip,userid,area,logindate,logintime) values(#{ip},#{userid},#{area},#{logindate},#{logintime})")
     @Insert("insert into loginhistory(ip,userid,area,logindate,logintime) values(#{ip},#{userId},#{area},#{loginDate},#{loginTime})")
     public int addNewHistory(LoginHistory history);
 
