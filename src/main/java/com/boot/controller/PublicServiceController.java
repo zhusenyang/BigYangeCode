@@ -66,6 +66,7 @@ public class PublicServiceController {
 		if (wb==null){
 			msg.setContent("帐号或密码错误");
 			msg.setStateNum(500);
+			return msg;
 		}
 		String real_salt=wb.getSalt();
 		String realPassword=MD5.MD5EncodeByUTF8(password+real_salt);
@@ -82,6 +83,7 @@ public class PublicServiceController {
 		}catch(Exception e ) {
 			msg.setContent(e.toString());
 			logger.error(e.getMessage());
+			msg.setStateNum(Message.ERROR_NUM);
 	        msg.setStateNum(500);
 		}
 		return msg;

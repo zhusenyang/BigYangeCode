@@ -17,8 +17,8 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item"><a href="javascript:;">
-                <img class="layui-nav-img">
-                <span id="user_name">用户名</span>
+                <img class="layui-nav-img" id="user_head_top">
+                <span id="user_name_top">用户名</span>
             </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -39,15 +39,8 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul id="left_order" class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">主页</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;">轮播图设置</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;">logo设置</a>
-                        </dd>
-                    </dl></li>
+                    <a href="javascript:;">基本资料</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -57,24 +50,27 @@
             <div class="" id="home_set" style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">基本信息</li>
+                        <li class="layui-this">基本资料</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <form class="layui-form layui-col-sm7" action="" >
+                            <form class="layui-form layui-col-sm7" action="" lay-filter="user-info-form" >
                                 <div class="layui-form-item">
-
+                                    <label class="layui-form-label">用户名</label>
+                                    <div class="layui-input-inline">
+                                        <input id="user-name" autocomplete="off" class="layui-input disabled" name="userName" disabled="disabled" value="123">
+                                    </div>
                                     <label class="layui-form-label">昵称</label>
                                     <div class="layui-input-inline">
-                                        <input id="nicoName-info" autocomplete="off" class="layui-input">
+                                        <input id="nicoName-info" autocomplete="off" class="layui-input" name="nicoName">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux"></div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">单选框</label>
                                     <div class="layui-input-block">
-                                        <input id="man" type="radio" name="sex" value="男" title="男"checked>
-                                        <input id="women" type="radio" name="sex" value="女" title="女" >
+                                        <input id="man" type="radio" name="sex" value="男" title="男" name="sex">
+                                        <input id="women" type="radio" name="sex" value="女" title="女" name="sex"  >
                                     </div>
                                 </div>
                                 <div class="layui-form-item layui-form-text">
@@ -112,9 +108,10 @@
         element = layui.element;
     });
     var layer
+    var form
     layui.use(['layer', 'form'], function(){
-             layer = layui.layer
-            ,form = layui.form;
+             layer = layui.layer;
+             form = layui.form;
     });
     //获取用户信息
     $(function () {
@@ -140,6 +137,8 @@
                 }
             }
         });
+        // form.val("user-info-form",user);
+        console.log(form.val("user-info-form"));
     })
 
     //登出
