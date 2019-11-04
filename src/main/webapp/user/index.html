@@ -58,12 +58,16 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">用户名</label>
                                     <div class="layui-input-inline">
-                                        <input id="user-name" autocomplete="off" class="layui-input disabled" name="userName" disabled="disabled" value="123">
+                                        <input id="user-name" style="background-color: #FBFBFB" autocomplete="off" class="layui-input disabled layui-btn-disabled" name="userName" disabled="disabled" >
                                     </div>
+                                </div>
+                                <div class="layui-form-item">
                                     <label class="layui-form-label">昵称</label>
                                     <div class="layui-input-inline">
                                         <input id="nicoName-info" autocomplete="off" class="layui-input" name="nicoName">
                                     </div>
+
+
                                     <div class="layui-form-mid layui-word-aux"></div>
                                 </div>
                                 <div class="layui-form-item">
@@ -73,20 +77,38 @@
                                         <input id="women" type="radio" name="sex" value="女" title="女" name="sex"  >
                                     </div>
                                 </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">地区</label>
+                                    <div class="layui-input-inline">
+                                        <input id="user-area" autocomplete="off" class="layui-input" name="user-area">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux"></div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">邮箱</label>
+                                    <div class="layui-input-inline">
+                                        <input id="eMail" autocomplete="off" class="layui-input" name="user-area">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">入站日期</label>
+                                    <div class="layui-input-inline ">
+                                        <input id="registered_Date"  style="background-color: #FBFBFB" disabled="disabled" autocomplete="off" class="layui-btn-disabled layui-input" name="registered_Date">
+                                    </div>
+                                </div>
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">文本域</label>
+                                    <label class="layui-form-label">个人简介</label>
                                     <div class="layui-input-block">
                                         <textarea id="introduction" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                    </div>
-                                </div>
                             </form>
-
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" >保存</button>
+                                    <button class="layui-btn layui-btn-primary" onclick="reset()">重置</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,6 +145,7 @@
                 if(result.stateNum==200){
                     var data = result.data;
                     user=data;
+                    $("#user-name").val(user.userName);
                     if(user.nicoName==null){
                         $("#nicoName-info").val(user.userName);
                     }else {
@@ -133,12 +156,14 @@
                     }else {
                         $("#woman").click();
                     }
+
                     $("#introduction").val(user.introduction);
+                    $("#user-area").val(user.area)
+                    $("#eMail").val(user.eMail)
+                    $("#registered_Date").val(user.registered_Date.split(" ")[0])
                 }
             }
         });
-        // form.val("user-info-form",user);
-        console.log(form.val("user-info-form"));
     })
 
     //登出
@@ -154,5 +179,25 @@
                 }
             }
         });
+    }
+
+    function reset(){
+        $("#user-name").val(user.userName);
+        if(user.nicoName==null){
+            $("#nicoName-info").val(user.userName);
+        }else {
+            $("#nicoName-info").val(user.nicoName);
+        }
+        if (user.sex=="man"){
+            $("#man").click();
+        }else {
+            $("#woman").click();
+        }
+        $("#introduction").val(user.introduction);
+
+        $("#introduction").val(user.introduction);
+        $("#user-area").val(user.area)
+        $("#eMail").val(user.eMail)
+        $("#registered_Date").val(user.registered_Date.split(" ")[0])
     }
 </script>
