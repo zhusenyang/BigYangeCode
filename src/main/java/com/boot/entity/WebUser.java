@@ -50,6 +50,19 @@ public class WebUser implements Serializable {
 	 */
 	private String introduction;
 
+	public Boolean getEmail_authenticate() {
+		return email_authenticate;
+	}
+
+	public void setEmail_authenticate(Boolean email_authenticate) {
+		this.email_authenticate = email_authenticate;
+	}
+
+	/**
+	 * 邮箱激活认证
+	 */
+	private Boolean email_authenticate;
+
 	public String getIntroduction() {
 		return introduction;
 	}
