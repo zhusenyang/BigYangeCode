@@ -71,7 +71,7 @@
                                     <div class="layui-form-mid layui-word-aux"></div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">单选框</label>
+                                    <label class="layui-form-label">性别</label>
                                     <div class="layui-input-block">
                                         <input id="man" type="radio" name="sex" value="男" title="男♂" name="sex">
                                         <input id="women" type="radio" name="sex" value="女" title="女♀" name="sex"  >
@@ -103,6 +103,12 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="layui-form layui-col-sm3">
+                                <img id="form_head" style="height: 200px;width: 200px;"><br><br>
+                                <button type="button" class="layui-btn" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>上传头像
+                                </button>
+                            </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
                                     <button class="layui-btn" >保存</button>
@@ -156,7 +162,8 @@
                     }else {
                         $("#woman").click();
                     }
-
+                    $("#user_head_top").attr("src","../head/"+user.head)
+                    $("#form_head").attr("src","../head/"+user.head)
                     $("#introduction").val(user.introduction);
                     $("#user-area").val(user.area)
                     $("#eMail").val(user.eMail)
@@ -194,7 +201,7 @@
             $("#woman").click();
         }
         $("#introduction").val(user.introduction);
-
+        $("#form_head").attr("src","../head/"+user.head)
         $("#introduction").val(user.introduction);
         $("#user-area").val(user.area)
         $("#eMail").val(user.eMail)
