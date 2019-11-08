@@ -51,17 +51,29 @@ public class UserServiceController {
 
 	@RequestMapping("/like")
 	public String like(){
-		return "like.html";
+		Subject cuser = SecurityUtils.getSubject();
+		if (cuser.isAuthenticated()){
+			return "index.html";
+		}
+		return "login.html";
 	}
 
 	@RequestMapping("/message")
 	public String message(){
-		return "message.html";
+		Subject cuser = SecurityUtils.getSubject();
+		if (cuser.isAuthenticated()){
+			return "index.html";
+		}
+		return "login.html";
 	}
 
-	@RequestMapping("/browsHistory")
+	@RequestMapping("/history")
 	public String browsHistory(){
-		return "browsHistory.html";
+		Subject cuser = SecurityUtils.getSubject();
+		if (cuser.isAuthenticated()){
+			return "index.html";
+		}
+		return "login.html";
 	}
 
 

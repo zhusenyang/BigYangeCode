@@ -224,9 +224,9 @@ function checkUserLogin(){
 				+'<ul class="sub_user" style="line-height:40px;margin-top:-17px; ">' +
 					'<li><a>'+webUser.userName+'</a></li>' +
 					'<li><a href="'+yu_ming+'/user/center">用户中心</a></li>' +
-					'<li><a>收藏</a></li>' +
-					'<li><a>消息</a></li>' +
-					'<li><a>浏览记录</a></li>' +
+					'<li><a href="'+yu_ming+'/user/like">收藏</a></li>' +
+					'<li><a href="'+yu_ming+'/user/message">消息</a></li>' +
+					'<li><a href="'+yu_ming+'/user/history">浏览记录</a></li>' +
 					'<li><a onclick="logout()">注销</a></li>' +
 					'</ul></li>'
 				user_part.empty();

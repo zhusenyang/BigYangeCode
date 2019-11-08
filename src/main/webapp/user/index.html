@@ -4,21 +4,21 @@
     <meta charset="utf-8">
     <script src="../js/config.js"></script>
     <script src="../layui/layui.js"></script>
-    <title>网站管理系统</title>
+    <title>个人中心</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
     <script type="text/javascript" src="../js/jquery.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">网站管理系统</div>
+        <div class="layui-logo">个人中心</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item"><a href="javascript:;">
                 <img class="layui-nav-img" id="user_head_top">
-                <span id="user_name_top">用户名</span>
+                <span id="top_name"></span>
             </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -38,8 +38,20 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul id="left_order" class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">基本资料</a>
+                <li class="layui-nav-item layui-nav-itemed" id="center" onclick="modelChange(this)">
+                    <a href="javascript:;" >基本资料</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" id="history" onclick="modelChange(this)">
+                    <a href="javascript:;" >浏览记录</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" id="like" onclick="modelChange(this)">
+                    <a href="javascript:;" >收藏</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" id="message" onclick="modelChange(this)">
+                    <a href="javascript:;" >消息</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" id="save_center" onclick="modelChange(this)">
+                    <a href="javascript:;">安全中心</a>
                 </li>
             </ul>
         </div>
@@ -47,7 +59,8 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 0px;">
-            <div class="" id="home_set" style="">
+            <!-- 个人中心-->
+            <div class="model" id="center_model" style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">基本资料</li>
@@ -56,7 +69,7 @@
                         <div class="layui-tab-item layui-show">
                             <form class="layui-form layui-col-sm7" action="" lay-filter="user-info-form" >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">用户名</label>
+                                    <label class="layui-form-label" >用户名</label>
                                     <div class="layui-input-inline">
                                         <input id="user-name" style="background-color: #FBFBFB" autocomplete="off" class="layui-input disabled layui-btn-disabled" name="userName" disabled="disabled" >
                                     </div>
@@ -119,6 +132,50 @@
                     </div>
                 </div>
             </div>
+            <!-- 浏览记录-->
+            <div class="model" id="history_model"  style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">浏览记录</li>
+                    </ul>
+                    <div class="layui-tab-content">
+
+                    </div>
+                </div>
+            </div>
+            <!--     收藏       -->
+            <div class="model" id="like_model"  style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">浏览记录</li>
+                    </ul>
+                    <div class="layui-tab-content">
+
+                    </div>
+                </div>
+            </div>
+            <!--     消息       -->
+            <div class="model" id="message_model"  style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">浏览记录</li>
+                    </ul>
+                    <div class="layui-tab-content">
+
+                    </div>
+                </div>
+            </div>
+            <!--      安全中心      -->
+            <div class="model"  id="save_center_model" style="">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">浏览记录</li>
+                    </ul>
+                    <div class="layui-tab-content">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="layui-footer">
@@ -141,6 +198,21 @@
              layer = layui.layer;
              form = layui.form;
     });
+
+
+    //切换功能模式
+    function modelChange(a){
+       var models= $(".model")
+        for (var i=0;i<models.length;i++){
+            var id=$(models[i]).attr("id")
+            if ($(a).attr("id")+"_model"==id){
+                $(models[i]).removeAttr("hidden");
+            } else {
+                $(models[i]).attr("hidden","hidden")
+            }
+        }
+    }
+
     //获取用户信息
     $(function () {
         $.ajax({
@@ -151,23 +223,7 @@
                 if(result.stateNum==200){
                     var data = result.data;
                     user=data;
-                    $("#user-name").val(user.userName);
-                    if(user.nicoName==null){
-                        $("#nicoName-info").val(user.userName);
-                    }else {
-                        $("#nicoName-info").val(user.nicoName);
-                    }
-                    if (user.sex=="man"){
-                        $("#man").click();
-                    }else {
-                        $("#woman").click();
-                    }
-                    $("#user_head_top").attr("src","../head/"+user.head)
-                    $("#form_head").attr("src","../head/"+user.head)
-                    $("#introduction").val(user.introduction);
-                    $("#user-area").val(user.area)
-                    $("#eMail").val(user.eMail)
-                    $("#registered_Date").val(user.registered_Date.split(" ")[0])
+                    reset();
                 }
             }
         });
@@ -188,12 +244,15 @@
         });
     }
 
+    //初始化用户信息
     function reset(){
         $("#user-name").val(user.userName);
         if(user.nicoName==null){
             $("#nicoName-info").val(user.userName);
+            $("#top_name").text(user.userName);
         }else {
             $("#nicoName-info").val(user.nicoName);
+            $("#top_name").text(user.nicoName);
         }
         if (user.sex=="man"){
             $("#man").click();
@@ -201,10 +260,20 @@
             $("#woman").click();
         }
         $("#introduction").val(user.introduction);
+        $("#user_head_top").attr("src","../head/"+user.head)
         $("#form_head").attr("src","../head/"+user.head)
         $("#introduction").val(user.introduction);
         $("#user-area").val(user.area)
         $("#eMail").val(user.eMail)
         $("#registered_Date").val(user.registered_Date.split(" ")[0])
     }
+
+    //init
+    $(function () {
+        var modelName =chooseCenterModel();
+        var model=$("#"+modelName);
+        var oldClass=model.attr("class");
+        model.attr("class",oldClass+" layui-this");
+        model.click();
+    })
 </script>
