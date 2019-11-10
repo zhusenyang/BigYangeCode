@@ -67,6 +67,7 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
+                            <span id="user_id" hidden="hidden"></span>
                             <form class="layui-form layui-col-sm7" action="" lay-filter="user-info-form" >
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" >用户名</label>
@@ -85,9 +86,9 @@
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">性别</label>
-                                    <div class="layui-input-block">
-                                        <input id="man" type="radio" name="sex" value="男" title="男♂" name="sex">
-                                        <input id="women" type="radio" name="sex" value="女" title="女♀" name="sex"  >
+                                    <div class="layui-input-block sex_choose">
+                                        <input id="man" type="radio" name="sex" value="man" title="男♂">
+                                        <input id="women" type="radio" name="sex" value="woman" title="女♀" >
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -112,19 +113,19 @@
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label">个人简介</label>
                                     <div class="layui-input-block">
-                                        <textarea id="introduction" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                        <textarea id="introduction" name="introduction" placeholder="请输入内容" class="layui-textarea"></textarea>
                                     </div>
                                 </div>
                             </form>
                             <div class="layui-form layui-col-sm3">
                                 <img id="form_head" style="height: 200px;width: 200px;"><br><br>
-                                <button type="button" class="layui-btn" id="test1">
-                                    <i class="layui-icon">&#xe67c;</i>上传头像
+                                <button type="button" class="layui-btn" id="head_upload">
+                                    <i class="layui-icon">&#xe67c;</i>更换头像
                                 </button>
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" >保存</button>
+                                    <button class="layui-btn" id="user_center_save"  onclick="saveUserCenter()">保存</button>
                                     <button class="layui-btn layui-btn-primary" onclick="reset()">重置</button>
                                 </div>
                             </div>
@@ -147,7 +148,7 @@
             <div class="model" id="like_model"  style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">浏览记录</li>
+                        <li class="layui-this">我的收藏</li>
                     </ul>
                     <div class="layui-tab-content">
 
@@ -158,10 +159,12 @@
             <div class="model" id="message_model"  style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">浏览记录</li>
+                        <li class="layui-this">回复</li>
+                        <li >站内信</li>
                     </ul>
                     <div class="layui-tab-content">
-
+                        <div class="layui-tab-item layui-show">回复</div>
+                        <div class="layui-tab-item">站内信</div>
                     </div>
                 </div>
             </div>
@@ -169,7 +172,7 @@
             <div class="model"  id="save_center_model" style="">
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">浏览记录</li>
+                        <li class="layui-this">安全中心</li>
                     </ul>
                     <div class="layui-tab-content">
 
@@ -180,12 +183,12 @@
     </div>
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        <a href="http://bigyangcode.xyz">© - bigyangcode</a>
+        <a href="http://bigyangcode.xyz" onload="chooseSex()">© - bigyangcode</a>
     </div>
 </div>
 
 </body>
-</html>
+</html >
 <script type="text/javascript">
     var user ;
     var element;
@@ -194,11 +197,106 @@
     });
     var layer
     var form
+    var userId
+    //初始化用户中心表单
     layui.use(['layer', 'form'], function(){
              layer = layui.layer;
              form = layui.form;
+            //获取用户信息
+            $.ajax({
+                url: yu_ming+"/user/getInfo",
+                type : "post",
+                scriptCharset : 'utf-8',
+                success: function(result){
+                    if(result.stateNum==200){
+                        var data = result.data;
+                        user=data;
+                        reset();
+                        chooseSex()
+                        initUpLoad()
+                    }
+                }
+            });
     });
+    var upload
+    function initUpLoad(){
+        layui.use('upload', function(){
+            upload = layui.upload;
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#head_upload' //绑定元素
+                ,url: './userCenterSave' //上传接口
+                ,data:{
+                    id:userId,
+                    userName:user.userName,
+                    area:function () {
+                        return $("#user-area").val()
+                    },
+                    introduction:function () {
+                        return $("#introduction").val()
+                    },
+                    nicoName:function () {
+                        return $("#nicoName-info").val()
+                    },
+                    sex:function () {
+                       return form.val("user-info-form").sex
+                    }
+                }
+                ,auto:false
+                ,accept:"images"
+                ,acceptMime : 'image/*'//只显示图片
+                ,bindAction: "#user_center_save"
+                ,size:"300"
+                ,choose:function (obj){
+                    //将每次选择的文件追加到文件队列
+                    var files = obj.pushFile();
+                    //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                    obj.preview(function(index, file, result) {
+                        // console.log(index); //得到文件索引
+                        // console.log(file); //得到文件对象
+                        // console.log(result); //得到文件base64编码，比如图片
+                        $("#form_head").attr("src",result);
+                    })
+                }
+                ,done: function(res){
+                    if(res.stateNum==200){
+                        reloadUserInfo()
+                    }
+                    layer.msg(res.content)
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        })
+    }
 
+    function reloadUserInfo(){
+        $.ajax({
+            url: yu_ming+"/user/getInfo",
+            type : "post",
+            scriptCharset : 'utf-8',
+            success: function(result){
+                if(result.stateNum==200){
+                    var data = result.data;
+                    user=data;
+                    reset();
+                    chooseSex()
+                    initUpLoad()
+                }
+            }
+        });
+    }
+
+    //更换性别
+    function chooseSex(){
+        var formDate = form.val("user-info-form");
+        formDate.sex=$("input[name='sex'][value='man']").attr("checked", user.sex == "man" ? true : false)
+        formDate.sex=$("input[name='sex'][value='woman']").attr("checked", user.sex == "woman" ? true : false)
+        console.log(formDate)
+        form.val(formDate)
+        form.render();
+    }
 
     //切换功能模式
     function modelChange(a){
@@ -213,21 +311,43 @@
         }
     }
 
-    //获取用户信息
-    $(function () {
-        $.ajax({
-            url: yu_ming+"/user/getInfo",
-            type : "post",
-            scriptCharset : 'utf-8',
-            success: function(result){
-                if(result.stateNum==200){
-                    var data = result.data;
-                    user=data;
-                    reset();
-                }
-            }
-        });
-    })
+    //提交个人中心的更改
+    function saveUserCenter(){
+        console.log($("#form_head").attr("src").indexOf("base64"))
+        if ($("#form_head").attr("src").indexOf("base64")>-1){
+            return;
+        }
+         console.log(form.val("user-info-form"));
+         $.ajax({
+             url: yu_ming+"/user/userCenterSave",
+             type : "post",
+             scriptCharset : 'utf-8',
+             data:{
+                 id:userId,
+                 userName:user.userName,
+                 area:function () {
+                     return $("#user-area").val()
+                 },
+                 introduction:function () {
+                     return $("#introduction").val()
+                 },
+                 nicoName:function () {
+                     return $("#nicoName-info").val()
+                 },
+                 sex:function () {
+                     return form.val("user-info-form").sex
+                 }
+             },
+             success: function(result){
+                 if(result.stateNum==200){
+                     reloadUserInfo()
+                 }
+                 layer.msg(result.content)
+             }
+         })
+    }
+
+
 
     //登出
     function logOut(){
@@ -246,6 +366,8 @@
 
     //初始化用户信息
     function reset(){
+        userId=user.id;
+        $("#user_id").text(user.id);
         $("#user-name").val(user.userName);
         if(user.nicoName==null){
             $("#nicoName-info").val(user.userName);
@@ -254,11 +376,6 @@
             $("#nicoName-info").val(user.nicoName);
             $("#top_name").text(user.nicoName);
         }
-        if (user.sex=="man"){
-            $("#man").click();
-        }else {
-            $("#woman").click();
-        }
         $("#introduction").val(user.introduction);
         $("#user_head_top").attr("src","../head/"+user.head)
         $("#form_head").attr("src","../head/"+user.head)
@@ -266,6 +383,7 @@
         $("#user-area").val(user.area)
         $("#eMail").val(user.eMail)
         $("#registered_Date").val(user.registered_Date.split(" ")[0])
+
     }
 
     //init

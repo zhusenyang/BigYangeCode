@@ -2,6 +2,9 @@ package com.boot.controller;
 
 import com.boot.dao.UserDao;
 import com.boot.entity.Message;
+import com.boot.service.UserService;
+import com.boot.utile.DateUtil;
+import com.boot.utile.ShiroUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.LoggerNameAwareMessage;
@@ -9,10 +12,17 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.entity.WebUser;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * @author yang
@@ -29,6 +39,12 @@ public class UserServiceController {
 	 */
 	@Autowired
 	UserDao userDao;
+
+	/**
+	 * 用户服务层
+	 */
+	@Autowired
+	UserService userService;
 
 	/**
 	 * @param token 用户登入认证密钥
@@ -76,7 +92,10 @@ public class UserServiceController {
 		return "login.html";
 	}
 
-
+	/**
+	 * 用户登出
+	 * @return
+	 */
 	@RequestMapping("/logout")
 	@ResponseBody
 	public Message logout(){
@@ -93,6 +112,10 @@ public class UserServiceController {
 		return msg;
 	}
 
+	/**
+	 * 获取用户信息
+	 * @return
+	 */
 	@RequestMapping("/getInfo")
 	@ResponseBody
 	public Message getUserInfo(){
@@ -102,6 +125,53 @@ public class UserServiceController {
 			WebUser webUser = (WebUser) SecurityUtils.getSubject().getPrincipal();
 			msg.setStateNum(Message.SUCCESS_NUM);
 			msg.setData(webUser);
+		}
+		return msg;
+	}
+
+	/**
+	 * 用户信息修改
+	 * @return
+	 */
+	@RequestMapping("/userCenterSave")
+	@ResponseBody
+	public Message saveUserCenter(WebUser user, MultipartFile file){
+		Message msg = new Message();
+		if (file!=null){
+			String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"static/head/";
+			String endWith = file.getOriginalFilename().split("\\.")[1];
+			Random random =  new Random(9);
+			int num = random.nextInt()+random.nextInt()+random.nextInt()+random.nextInt()+random.nextInt();
+			String fileName = DateUtil.getDateForDay() +num+"."+endWith;
+			File newFile = new File(path+fileName);
+			if(!newFile.getParentFile().exists()){
+				newFile.getParentFile().mkdirs();
+			}
+			try {
+				file.transferTo(newFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+				logger.error("上传失败....");
+				msg.setStateNum(Message.ERROR_NUM);
+				msg.setContent("上传失败.");
+			}
+			user.setHead(fileName);
+		}
+		logger.info(user.getHead());
+		if (user.getHead()==null){
+			user.setHead(ShiroUtil.getUser().getHead());
+		}
+		// TODO: 2019/11/9 删除原先的头像
+		Integer result = userDao.updateUserCenter(user);
+		if (result!=null &&result>0){
+			userService.updateUserInfoFromUserCenter(user);
+			msg.setStateNum(Message.SUCCESS_NUM);
+			msg.setContent("更新成功");
+			logger.debug("更新成功.");
+		}else{
+			msg.setStateNum(Message.ERROR_NUM);
+			msg.setContent("更新失败");
+			logger.debug("更新失败.");
 		}
 		return msg;
 	}

@@ -139,5 +139,22 @@ public class WebUser implements Serializable {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	
+
+	/**
+	 * 讲用户信息全面更新
+	 * @param user
+	 */
+	public void upDateUserInfo(WebUser user){
+		this.setSex(user.getSex());
+		this.setNicoName(user.getNicoName());
+		this.setIntroduction(user.getIntroduction());
+		this.setArea(user.getArea());
+		this.setHead(user.getHead());
+		this.setEmail_authenticate(user.getEmail_authenticate());
+		this.setPassword(user.getPassword());
+		this.setRegistered_Date(user.getRegistered_Date());
+		this.setSalt(user.getSalt());
+		this.setId(user.getId());
+		this.setUserName(user.getUserName());
+	}
 }
