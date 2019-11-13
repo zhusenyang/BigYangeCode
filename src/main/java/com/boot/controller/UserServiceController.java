@@ -2,12 +2,13 @@ package com.boot.controller;
 
 import com.boot.dao.UserDao;
 import com.boot.entity.Message;
+import com.boot.entity.UserOperate;
 import com.boot.service.UserService;
 import com.boot.utile.DateUtil;
+import com.boot.utile.JacksonUtil;
 import com.boot.utile.ShiroUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.LoggerNameAwareMessage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -165,6 +165,14 @@ public class UserServiceController {
 		Integer result = userDao.updateUserCenter(user);
 		if (result!=null &&result>0){
 			userService.updateUserInfoFromUserCenter(user);
+			String resultClass = user.getClass().getName();
+			String resultJson = JacksonUtil.toJSon(user);
+			UserOperate userOperate = new UserOperate();
+			userOperate.setUser_id(user.getId());
+			userOperate.setOperate_result(resultJson);
+			userOperate.setOperate_type(0);
+			userOperate.setResult_class(resultClass);
+			userDao.insertUserOperate(userOperate);
 			msg.setStateNum(Message.SUCCESS_NUM);
 			msg.setContent("更新成功");
 			logger.debug("更新成功.");

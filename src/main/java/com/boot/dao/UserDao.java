@@ -1,11 +1,9 @@
 package com.boot.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.boot.entity.UserOperate;
+import org.apache.ibatis.annotations.*;
 
 import com.boot.entity.WebUser;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserDao {
@@ -17,7 +15,9 @@ public interface UserDao {
 	public WebUser findUserByName(@Param("userName") String userName);
 	@Select("select * from WebUser where userName=#{userName}")
 	public WebUser findUserByNameForShrio(@Param("userName") String userName);
-
 	@Update("update WebUser set niconame=#{nicoName} , area=#{area},introduction=#{introduction},head=#{head},sex=#{sex} where id=#{id}")
 	public Integer updateUserCenter(WebUser user);
+	@Insert("insert into user_operate(user_id,operate_type,operate_result,result_class)  " +
+			"values(#{user_id},#{operate_type},#{operate_result},#{result_class})")
+	public Integer insertUserOperate(UserOperate result_class);
 }
