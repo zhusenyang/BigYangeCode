@@ -75,9 +75,12 @@ public class PublicServiceController {
 			token.setRememberMe(true);
 			logger.info("开始验证用户信息");
 			Subject currentUser = SecurityUtils.getSubject();
+			logger.info("当前用户信息:{}"+currentUser.getPrincipal());
 			currentUser.login(token);
 	        WebUser webUser = (WebUser) currentUser.getPrincipal();
+			logger.info("当前用户信息:{}"+currentUser.getPrincipal());
 			userService.addLoginHistory(request,webUser);
+
 	        msg.setContent("登入成功");
 	        msg.setStateNum(200);
 		}catch(Exception e ) {
@@ -110,6 +113,8 @@ public class PublicServiceController {
 		msg.setStateNum(Message.SUCCESS_NUM);
 		logger.info("验证用户是否登入..");
 		Subject currentUser = SecurityUtils.getSubject();
+
+		logger.info("当前用户信息:{}"+currentUser.getPrincipal());
 		msg.setData(currentUser.getPrincipal());
 		if (!currentUser.isAuthenticated()){// 若用户登入验证正确则返回
 			msg.setStateNum(Message.USER_NO_LOGIN);

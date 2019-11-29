@@ -67,6 +67,8 @@ public class ShiroConfiguration {
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionManager.put("/user/**", "authc");//登入用户
         filterChainDefinitionManager.put("/manage/**", "anon");
+        filterChainDefinitionManager.put("/checkUserLogin", "authc");//登入用户
+
 //        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
 //        filterChainDefinitionManager.put("/login", "anon");
 //        filterChainDefinitionManager.put("/index", "anon");
