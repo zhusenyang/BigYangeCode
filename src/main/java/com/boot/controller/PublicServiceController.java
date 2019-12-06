@@ -1,7 +1,10 @@
 package com.boot.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import com.boot.entity.VisitorHistory;
+import com.boot.service.VisitorService;
 import com.boot.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,6 +51,8 @@ public class PublicServiceController {
 	ArticleMapper articleMapper;
 	@Autowired
 	ArticleTypeMapper articleTypeMapper;
+	@Autowired
+	VisitorService visitorService;
 
 	@RequestMapping("/getMenu")
 	@ResponseBody
@@ -138,6 +143,31 @@ public class PublicServiceController {
 		}else{
 			msg.setStateNum(Message.USER_NO_LOGIN);
 			msg.setContent("用户并未登入.");
+		}
+		return msg;
+	}
+
+	/** 生成访问记录
+	 * @param page 访问页面
+	 * @return
+	 */
+	@RequestMapping("/visitor")
+	@ResponseBody
+	public Message visitorHistory(String page,HttpServletRequest request){
+		Message msg = new Message();
+		Subject currentUser = SecurityUtils.getSubject();
+		VisitorHistory visitorHistory = new VisitorHistory();
+		Date date = new Date();
+		visitorHistory.setVisitor_date(date);
+		visitorHistory.setVisitor_time(date);
+		visitorHistory.setVisitor_page(page);
+		if (currentUser.isAuthenticated()){
+			WebUser webUser = (WebUser) currentUser.getPrincipal();
+			visitorHistory.setUser_id(webUser.getId());
+		}
+		boolean flag = visitorService.addVisitorHistory(visitorHistory,request);
+		if (flag){
+			msg.setStateNum(Message.SUCCESS_NUM);
 		}
 		return msg;
 	}

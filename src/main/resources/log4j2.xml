@@ -73,7 +73,10 @@
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
         </logger>
-
+        <logger name="com.boot.dao.VisitorDao" level="debug" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+        </logger>
         <root level="info">
             <appender-ref ref="Console"/>
         </root>
