@@ -1,5 +1,7 @@
 package com.boot.entity;
 
+import java.util.Date;
+
 /**
  * 用户操作记录
  */
@@ -24,6 +26,19 @@ public class UserOperate {
      * 结果对象类 集合json字符串 利用反射及jackson工具获得具体结果对象
      */
     String result_class;
+
+    /**
+     * 操作时间
+     */
+    Date operate_time;
+
+    public Date getOperate_time() {
+        return operate_time;
+    }
+
+    public void setOperate_time(Date operate_time) {
+        this.operate_time = operate_time;
+    }
 
     public Integer getId() {
         return id;

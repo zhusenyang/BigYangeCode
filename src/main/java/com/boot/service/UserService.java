@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -55,5 +56,48 @@ public class UserService {
 //        ShiroUtil.setUser(Cuser);
         WebUser webUser = (WebUser) SecurityUtils.getSubject().getPrincipal();
         webUser.upDateUserInfo(Cuser);
+    }
+
+    /**
+     * 验证用户信息
+     * @param user
+     * @return
+     */
+    public boolean checkUserInfo(WebUser user){
+        if (user.getUserName()==null||"".equals(user.getUserName())){
+            return false;
+        }
+        if (user.getPassword()==null||"".equals(user.getPassword())){
+            return  false;
+        }
+        return true;
+    }
+
+    /**
+     * 验证用户信息特殊内容
+     * @param user
+     * @return
+     */
+    public boolean checkUserInfoContent(WebUser user){
+
+        return true;
+    }
+
+    /**
+     * 快速注册
+     * @param webUser
+     * @return
+     */
+    public int fastRegistered(WebUser webUser){
+        return  userDao.insertUser(webUser);
+    }
+
+    /**
+     * 查询用户的操作记录
+     * @param userId
+     * @return
+     */
+    public List getUserOprate(Integer userId){
+       return userDao.selectUserOperrate(userId);
     }
 }

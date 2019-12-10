@@ -14,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -172,6 +175,7 @@ public class UserServiceController {
 			userOperate.setOperate_result(resultJson);
 			userOperate.setOperate_type(0);
 			userOperate.setResult_class(resultClass);
+			userOperate.setOperate_time(new Date());
 			userDao.insertUserOperate(userOperate);
 			msg.setStateNum(Message.SUCCESS_NUM);
 			msg.setContent("更新成功");
@@ -182,5 +186,23 @@ public class UserServiceController {
 			logger.debug("更新失败.");
 		}
 		return msg;
+	}
+
+	/**
+	 * 获取用户操作记录
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/operate/{userid}")
+	@ResponseBody
+	public List getUserOprate(@PathVariable String userid,Integer page,Integer limit){
+		try{
+			Integer userId = Integer.parseInt(userid);
+			List result = userService.getUserOprate(userId);
+			return result;
+		}catch (Exception e){
+			logger.error(e.getMessage());
+		}
+		return null;
 	}
 }

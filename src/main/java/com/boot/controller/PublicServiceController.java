@@ -2,10 +2,12 @@ package com.boot.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-import com.boot.entity.VisitorHistory;
+import com.boot.entity.*;
 import com.boot.service.VisitorService;
 import com.boot.service.UserService;
+import com.boot.utile.AddressUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -20,9 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.dao.ArticleMapper;
 import com.boot.dao.ArticleTypeMapper;
 import com.boot.dao.UserDao;
-import com.boot.entity.ArticleType;
-import com.boot.entity.Message;
-import com.boot.entity.WebUser;
 import com.boot.utile.MD5;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,13 +95,60 @@ public class PublicServiceController {
 		}
 		return msg;
 	}
-	
-	public Message registeredUser() {
+
+	/**
+	 * 用户注册
+	 * @param webUser
+	 * @return
+	 */
+	@RequestMapping("/registered")
+	@ResponseBody
+	public Message registeredUser( WebUser webUser,HttpServletRequest request) {
 		Message msg=Message.createMessage();
-		if (true) {//TODO 判断用户是否登入
-			//对已登入用户拒绝开放注册服务
+		logger.info("注册新用户，用户名:{}，密码:{}，ip:{}",
+				webUser.getUserName(),webUser.getPassword(),AddressUtil.getRealIp(request));
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!userService.checkUserInfo(webUser)){
+			msg.setStateNum(Message.ERROR_NUM);
+			msg.setContent("帐号密码不可为空.");
+			logger.info("帐号或密码为空，注册失败..");
+			return  msg;
+		}
+
+		if (currentUser.isAuthenticated()) {
+			msg.setStateNum(Message.ERROR_NUM);
+			msg.setContent("您已登入.");
+			logger.info("用户已登入.注册失败.");
+			return msg;
 		}else {
 			//开放注册
+			webUser.setNicoName(webUser.getUserName());
+			webUser.setRegistered_Date(new Date());
+			String ip = AddressUtil.getRealIp(request);
+			LoginAddress add = AddressUtil.getAddressByIP(ip);
+			String area = add.getAddress();
+			webUser.setArea(area);
+			webUser.setSalt(UUID.randomUUID().toString().replace("-",""));
+			String realPassword = MD5.MD5EncodeByUTF8(webUser.getPassword()+webUser.getSalt());
+			String oldPassword = webUser.getPassword();
+			webUser.setPassword(realPassword);
+
+			if (userService.fastRegistered(webUser)==0){
+				msg.setStateNum(Message.ERROR_NUM);
+				msg.setContent("帐号已存在.");
+				logger.info("帐号已存在.");
+				return msg;
+			}
+			Message loginResult = login(webUser.getUserName(),oldPassword,request);
+			if (loginResult.getStateNum()==Message.SUCCESS_NUM){
+				msg.setStateNum(Message.SUCCESS_NUM);
+				msg.setContent("注册成功.已自动登入.");
+				logger.info("注册成功.");
+			}else{
+				msg.setStateNum(loginResult.getStateNum());
+				msg.setContent(loginResult.getContent());
+				logger.info(msg.getContent());
+			}
 		}
 		return msg;
 	}

@@ -14,7 +14,7 @@ public class Message implements Serializable {
 	public static  final int USER_NO_LOGIN = 300;
 	private static final long serialVersionUID = 5978811454467951173L;
 	private int StateNum;
-	private Object Content;
+	private String Content;
 	private Object Data;
 
 	public Object getData() {
@@ -39,7 +39,7 @@ public class Message implements Serializable {
 	public void setStateNum(int stateNum) {
 		StateNum = stateNum;
 	}
-	public Object getContent() {
+	public String getContent() {
 		return Content;
 	}
 	public void setContent(String content) {

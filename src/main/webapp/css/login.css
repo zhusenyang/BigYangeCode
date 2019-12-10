@@ -58,7 +58,15 @@ button:hover {
 	left: 0;
 	z-index: 9;
 }
-
+.graybox2{
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .6);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9;
+}
 .popbox {
 	width: 600px;
 	padding-bottom: 30px;
@@ -94,7 +102,7 @@ button:hover {
 	font-weight: bold;
 	width: 36px;
 	height: 36px;
-	background: url("images/popbox-close.png") center no-repeat;
+	background: url("../images/popbox-close.png") center no-repeat;
 }
 
 .popcon {
@@ -179,7 +187,7 @@ button:hover {
 /*自定义checked选中之后的样式*/
 .popcon .remember .inputbox:checked {
 	border: 1px solid #749dcf;
-	background: #FFFFff url("images/dh.png") center no-repeat;
+	background: #FFFFff url("../images/dh.png") center no-repeat;
 	cursor: pointer;
 }
 

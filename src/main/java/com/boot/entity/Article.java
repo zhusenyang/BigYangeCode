@@ -17,8 +17,18 @@ public class Article {
 	private String content;
 	private Date publish_time;
 	private int type_id;
+	Integer userId;
 	private String article_type;
 	private Date last_edtion_time;
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public int getId() {
 		return id;
 	}

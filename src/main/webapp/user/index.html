@@ -22,10 +22,10 @@
             </a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a href="javascrpt:;">基本资料</a>
+                        <a href="/center">基本资料</a>
                     </dd>
                     <dd>
-                        <a href="">安全设置</a>
+                        <a href="/userCenterSave">安全设置</a>
                     </dd>
                 </dl></li>
             <li class="layui-nav-item">
@@ -147,11 +147,15 @@
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">浏览记录</li>
-                        <li>操作记录</li>
+                        <li onclick="loadOperate()">操作记录</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">浏览记录</div>
-                        <div class="layui-tab-item">操作记录</div>
+                        <div class="layui-tab-item">
+                            <table id="operate">
+
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,6 +210,10 @@
     layui.use('element', function() {
         element = layui.element;
     });
+    var table
+    layui.use('table',function () {
+        table= layui.table;
+    })
     var layer
     var form
     var userId
@@ -222,6 +230,7 @@
                     if(result.stateNum==200){
                         var data = result.data;
                         user=data;
+                        userId=user.id;
                         reset();
                         chooseSex()
                         initUpLoad()
@@ -405,4 +414,21 @@
         model.attr("class",oldClass+" layui-this");
         model.click();
     })
+
+    //加载用户操作记录
+    function loadOperate(){
+
+        table.render({
+            elem: '#operate'
+            ,height: 312
+            ,url: yu_ming+'/user/operate/'+userId //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'operate_type', title: '操作类型', width:80}
+                ,{field: 'operate_result', title: '操作结果', width:80, sort: true}
+                ,{field: 'result_class', title: '操作对象', width: 177}
+            ]]
+        });
+    }
 </script>

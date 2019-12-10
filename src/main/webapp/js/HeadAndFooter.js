@@ -40,7 +40,7 @@ function loadHead(){
      
       '<!--search end--> '+
     '</nav>'+
-    '<div id="user_model"  style="position:absolute;right:2%;top:0"><a id="login" href="javascript:;">登录</a><span>/</span><a class="login"href="javascript:;">注册</a></div>'
+    '<div id="user_model"  style="position:absolute;right:2%;top:0"><a id="login" href="javascript:;">登录</a><span>/</span><a  id="registered" class="login"href="javascript:;">注册</a></div>'
     ;
 	
 	var door_head = document.getElementById("headmenu");
@@ -164,21 +164,21 @@ function loadLogin(){
                     '<i class="fa fa-user"></i>'+
                 '</div>'+
                 '<div class="group">'+
-                    '<input id="password" type="password" value="请输入密码" onFocus="if(value=='+
-                "'请输入密码'"+
+                    '<input id="password" type="password" value="" onFocus="if(value=='+
+                "''"+
                 ') {value='+
                 "''"+
                 '}" onBlur="if(value=='+
                 "''"+
                 '){value='+
-                "'请输入密码'"+
+                "''"+
                 '}">'+
                     '<i class="fa fa-lock"></i>'+
                 '</div>'+
             '</div>'+
             '<div class="remember clearfix">'+
                 '<div class="remember-con">'+
-                    '<input type="checkbox" id="input1" class="inputbox">'+
+                    '<input type="checkbox" id="input1" class="inputbox" checked>'+
                     '<label for="input1">记住密码</label>'+
                 '</div>'+
                 '<div class="remember-con">'+
@@ -198,14 +198,126 @@ function loadLogin(){
 			load_Login.append(login_model);
 		}
 	}
-	
+	var registered_model='<div class="registered" style="display: none">'+
+		'<div class="graybox2" ></div>'+
+		'<div class="popbox">'+
+		'<div class="poptop">'+
+		'<h3>快速注册</h3>'+
+		'<a href="javascript:;" class="close"></a>'+
+		'</div>'+
+		'<div class="popcon">'+
+		'<div>'+
+		'<div class="group">'+
+		'<input id="re_userName" type="text" value="请输入帐号" onFocus="if(value=='+
+		"''"+
+		') {value='+
+		"''"+
+		'}" onBlur="if(value=='+
+		"''"+
+		'){value='+
+		"''"+
+		'}">'+
+		'<i class="fa fa-user"></i>'+
+		'</div>'+
+		'<div class="group">'+
+		'<input id="re_password" type="password" value="" onFocus="if(value=='+
+		"''"+
+		') {value='+
+		"''"+
+		'}" onBlur="if(value=='+
+		"''"+
+		'){value='+
+		"''"+
+		'}">'+
+		'<i class="fa fa-lock"></i>'+
+		'</div>'+
+		'<div class="group">'+
+		'<input id="re_password2" type="password" value="" onFocus="if(value=='+
+		"''"+
+		') {value='+
+		"''"+
+		'}" onBlur="if(value=='+
+		"''"+
+		'){value='+
+		"''"+
+		'}">'+
+		'<i class="fa fa-lock"></i>'+
+		'</div>'+
+		'</div>'+
+		'<div class="remember clearfix">'+
+		'<div class="remember-con">'+
+		'</div>'+
+		'<div class="remember-con">'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'<div class="divbtn clearfix">'+
+		'<a href="javascript:;" class="btn ok" onclick="registered()">注册</a>'+
+		'<a href="javascript:;" class="btn" id="cancel2">取消</a>'+
+		'</div>'+
+		'</div>'+
+		'</div>';
+
+	if(load_Login!=null){
+		if (load_Login!=null) {
+			load_Login.append(registered_model);
+		}
+	}
+
+
 	$('#login').click(function () {
         $('.mypop').show();
     });
     $('.graybox,.close,#cancel').click(function () {
         $('.mypop').hide();
     })
+
+	$('#registered').click(function () {
+		$('.registered').show();
+	});
+	$('.graybox2,.close,#cancel2').click(function () {
+		$('.registered').hide();
+	})
 }
+
+function registered(){
+	//验证两次密码是否匹配
+	var user_name = $("#re_userName").val();
+	var password1=$("#re_password").val();
+	var password2=$("#re_password2").val();
+	if (user_name==null){
+		alert("帐号不可为空");
+		return
+	}
+	if (password1==null || password2==null) {
+		alert("密码不可为空.")
+	}
+
+	if (password1!=null&&password2==password1){
+		var webUser = {
+			"userName":user_name,
+			"password":password1
+		}
+		$.ajax({
+			url: yu_ming+"/registered",
+			async:false,
+			type : "post",
+			data:webUser,
+			scriptCharset : 'utf-8',
+			success: function(result){
+				if(result.stateNum==200){
+					alert(result.content)
+					checkUserLogin();
+				}else{
+					alert(result.content)
+				}
+			}
+		});
+	} else{
+		alert("两次输入的密码不一致.")
+	}
+}
+
 function checkUserLogin(){
 	$.ajax({
 		url: yu_ming+"/checkUserLogin",
@@ -232,6 +344,7 @@ function checkUserLogin(){
 				user_part.empty();
 				user_part.append(user_model);
 				$("#cancel").click();
+				$("#cancel2").click();
 				return true;
 			}else{
 				return false;
