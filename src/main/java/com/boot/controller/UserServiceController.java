@@ -7,6 +7,8 @@ import com.boot.service.UserService;
 import com.boot.utile.DateUtil;
 import com.boot.utile.JacksonUtil;
 import com.boot.utile.ShiroUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -24,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -195,14 +196,19 @@ public class UserServiceController {
 	 */
 	@RequestMapping("/operate/{userid}")
 	@ResponseBody
-	public List getUserOprate(@PathVariable String userid,Integer page,Integer limit){
+	public Message getUserOprate(@PathVariable String userid,Integer page,Integer limit){
+		Message msg =new Message();
+
 		try{
 			Integer userId = Integer.parseInt(userid);
-			List result = userService.getUserOprate(userId);
-			return result;
+			PageInfo<UserOperate> result = userService.getUserOprate(userId,page,limit);
+			msg.setStateNum(0);
+			msg.setData(result);
+			msg.setContent("search success.");
 		}catch (Exception e){
 			logger.error(e.getMessage());
+			msg.setStateNum(Message.ERROR_NUM);
 		}
-		return null;
+		return msg;
 	}
 }

@@ -423,6 +423,14 @@
             ,height: 312
             ,url: yu_ming+'/user/operate/'+userId //数据接口
             ,page: true //开启分页
+            ,parseData: function(res){ //res 即为原始返回的数据
+                return {
+                    "code": res.stateNum, //解析接口状态
+                    "msg": res.content, //解析提示文本
+                    "count": res.data.total, //解析数据长度
+                    "data": res.data.list //解析数据列表
+                };
+            }
             ,cols: [[ //表头
                 {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
                 ,{field: 'operate_type', title: '操作类型', width:80}

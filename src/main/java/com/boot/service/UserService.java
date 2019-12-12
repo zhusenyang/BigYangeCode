@@ -3,9 +3,12 @@ package com.boot.service;
 import com.boot.dao.LoginHistoryDao;
 import com.boot.dao.UserDao;
 import com.boot.entity.LoginHistory;
+import com.boot.entity.UserOperate;
 import com.boot.entity.WebUser;
 import com.boot.utile.AddressUtil;
 import com.boot.utile.ShiroUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,8 @@ import java.util.List;
 
 @Service
 public class UserService {
+    @Autowired
+    PageHelper pageHelper;
 
     @Autowired
     UserDao userDao;
@@ -97,7 +102,10 @@ public class UserService {
      * @param userId
      * @return
      */
-    public List getUserOprate(Integer userId){
-       return userDao.selectUserOperrate(userId);
+    public PageInfo<UserOperate> getUserOprate(Integer userId,Integer page,Integer limit){
+        PageHelper.startPage(page,limit);
+        List<UserOperate> result = userDao.selectUserOperrate(userId);
+        PageInfo<UserOperate> pageResult = new PageInfo<>(result);
+       return pageResult;
     }
 }
