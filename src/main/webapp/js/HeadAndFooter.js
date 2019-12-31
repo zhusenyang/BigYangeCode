@@ -48,7 +48,7 @@ function loadHead(){
 }
 function loadFooter(){
 	
-	var footer =  '<p>Design by <a href="http://www.bigyangcode.xyz" target="_blank">洋</a> <a href="/">浙ICP备18018513号-1</a></p>';
+	var footer =  '<p>ICP证: <a href="http://www.beian.miit.gov.cn/" target="_blank"></a> <a href="http://www.beian.miit.gov.cn/">浙ICP备18018513号-1</a></p>';
 	var door_head = document.getElementById("footer")
 	door_head.innerHTML=footer;
 }
