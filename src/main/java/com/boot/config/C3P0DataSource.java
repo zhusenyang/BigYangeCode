@@ -27,7 +27,7 @@ public class C3P0DataSource {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		dataSource.setUser("root");
 		dataSource.setPassword("123456");
-		dataSource.setJdbcUrl("jdbc:mysql://119.23.23.35:3306/my_website?useSSL=false");
+		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_website?useSSL=false");
 		try {
 			dataSource.setDriverClass("com.mysql.jdbc.Driver");
 		} catch (PropertyVetoException e) {
